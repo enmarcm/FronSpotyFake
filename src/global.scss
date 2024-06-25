@@ -46,3 +46,17 @@
 *{
     font-family: "Roboto", sans-serif;
 }
+
+ion-input{
+    outline: none;
+    color: green;
+}
+
+input{
+    outline-style: none;
+}
+
+input:focus{
+    outline-style: none ;
+    border: none;
+}

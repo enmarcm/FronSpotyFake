@@ -4,7 +4,8 @@
       <ion-row>
         <label class="font-extrabold text-xl">Email o nombre de usuario</label>
         <ion-input placeholder="theenmanuel123@gmail.com / enmarcm" class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
-        color="success"></ion-input>
+        color="success"
+        [(ngModel)]="username"></ion-input>
       </ion-row>
 
       <ion-row>
@@ -15,13 +16,14 @@
           class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
           color="success"
           fill="outline"
+          [(ngModel)]="password"
         >
           <ion-input-password-toggle slot="end" color="success" class="border-transparent outline-none"></ion-input-password-toggle>
         </ion-input>
       </ion-row>
 
       <ion-row>
-        <ion-button shape="round" color="success" class="mx-auto">
+        <ion-button shape="round" color="success" class="mx-auto" (click)="login()">
           <span class="text-white font-bold text-md">iniciar sesion</span>
         </ion-button>
       </ion-row>

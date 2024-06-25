@@ -1,0 +1,7 @@
+{
+  "name": "SpotyFake",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

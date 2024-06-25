@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import {IonicModule} from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet],
+  imports: [ IonicModule],
 })
 export class AppComponent {
-  constructor() {}
+  shouldRenderMenu: boolean;
+
+  constructor(private router: Router) {
+    this.shouldRenderMenu = !['/','/login', '/register'].includes(this.router.url);
+
+    console.log('this.router.url', this.router.url)
+  }
 }

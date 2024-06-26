@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { URL_REQUEST } from 'src/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,10 @@ export class LoginService {
 
   //Falta crear el tipo y la interfaz
 
-  sendLoginRequest(username: string, password: string) {
+  sendLoginRequest(userName: string, password: string) {
     return firstValueFrom(
-      this.httpClient.post('myrul', { username, password })
+      this.httpClient.post(URL_REQUEST.LOGIN, { userName, password })
     );
   }
 }
+

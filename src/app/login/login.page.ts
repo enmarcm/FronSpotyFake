@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, LoadingController } from '@ionic/angular';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -19,12 +19,25 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  constructor(public loadingController: LoadingController) {}
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Iniciando sesion...',
+      translucent: true,
+    });
+    return await loading.present();
+  }
+
   async login() {
-    alert(`${this.username} y ${this.password}`);
-    const response = await this.loginService.sendLoginRequest(
-      this.username,
-      this.password
-    );
-    console.log(response);
+    try {
+      await this.presentLoading();
+      await this.loginService.sendLoginRequest(this.username, this.password);
+    } catch (error) {
+      console.error('Error al iniciar sesion', error);
+    } finally {
+      await this.loadingController.dismiss();
+    }
   }
 }

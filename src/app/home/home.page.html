@@ -20,7 +20,7 @@
 
       <ion-row class="overflow-x-scroll flex-nowrap min-h-48 h-[15%]">
         @for(song of songs; track song.id){
-        <ion-col size="6">
+        <ion-col size="7">
           <item-card
             [songName]="song.name"
             [artistName]="song.artistNames"
@@ -45,7 +45,7 @@
 
       <ion-row class="overflow-x-scroll flex-nowrap min-h-48 h-[15%]">
         @for(artist of artists; track artist.id){
-        <ion-col size="6">
+        <ion-col size="7">
           <item-artist
             [urlImage]="artist.urlImage"
             [idArtist]="artist.id"

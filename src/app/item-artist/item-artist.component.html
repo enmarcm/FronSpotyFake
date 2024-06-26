@@ -1,0 +1,17 @@
+<ion-card
+  [id]="idArtist"
+  class="bg-transparent hover:bg-gray-900 h-max"
+>
+  <ion-img
+    alt="Silhouette of mountains"
+    [src]="urlImage"
+    class="w-full rounded-full h-128 aspect-square"
+  ></ion-img>
+
+  <ion-card-header class="bg-transparent grow flex flex-col ">
+    <ion-card-title class="text-md font-bold text-white">{{
+      artistName
+    }}</ion-card-title>
+  </ion-card-header>
+
+</ion-card>

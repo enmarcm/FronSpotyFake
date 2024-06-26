@@ -6,20 +6,57 @@
 
 <ion-content [fullscreen]="true">
   <div class="bg-black">
-    <ion-grid class="min-h-screen overflow-y-auto" [fixed]="true">
-
-      <!-- Como hago -->
-      <ion-row class="h-[40%] overflow-x-scroll flex-nowrap">
-
-        @for(song of songs; track song.id){
-          <ion-col size="6">
-            <item-card [songName]="song.name" [artistName]="song.artistNames" [urlImage]="song.urlImage" [idSong]="song._id"/>
-          </ion-col>
-        }
-        
+    <ion-grid class="min-h-screen overflow-y-auto p-5" [fixed]="true">
+      <!-- Canciones -->
+      <ion-row class="h-[5%]">
+        <ion-col size="12">
+          <ion-text>
+            <h2 class="text-white font-extrabold text-2xl text-start">
+              Ultimas canciones
+            </h2>
+          </ion-text>
+        </ion-col>
       </ion-row>
 
+      <ion-row class="overflow-x-scroll flex-nowrap min-h-48 h-[15%]">
+        @for(song of songs; track song.id){
+        <ion-col size="6">
+          <item-card
+            [songName]="song.name"
+            [artistName]="song.artistNames"
+            [urlImage]="song.urlImage"
+            [idSong]="song._id"
+            class="h-full"
+          />
+        </ion-col>
+        }
+      </ion-row>
 
+      <!-- Artistas -->
+      <ion-row class="h-[5%]">
+        <ion-col size="12">
+          <ion-text>
+            <h2 class="text-white font-extrabold text-2xl text-start">
+              Artistas del momento
+            </h2>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="overflow-x-scroll flex-nowrap min-h-48 h-[15%]">
+        @for(artist of artists; track artist.id){
+        <ion-col size="6">
+          <item-artist
+            [urlImage]="artist.urlImage"
+            [idArtist]="artist.id"
+            class="h-full"
+            [artistName]="artist.name"
+          />
+        </ion-col>
+        }
+      </ion-row>
+
+      <!-- Albunes -->
     </ion-grid>
   </div>
 </ion-content>

@@ -1,0 +1,75 @@
+[
+  {
+    "_id": "5WoC5tREb1zyxfmLu3RyQ7",
+    "idArtist": [
+      "0qTZZWLzuD59Un5r1speHm",
+      "1r3tpVQ08jFAA2P4xzV5o4",
+      "2YRyPiW98bpkARAS4B3OQP"
+    ],
+    "artistNames": ["Chris Jedi", "Gaby Music", "Dei V"],
+    "name": "PERREO LENTO",
+    "duration": 156640,
+    "urlImage": "https://i.scdn.co/image/ab67616d0000b273a65227a0b8ffdcf26995187d",
+    "urlSong": "https://p.scdn.co/mp3-preview/23de3926689af61772c7ccb7c7110b1f4643ddf4?cid=cfe923b2d660439caf2b557b21f31221",
+    "date": "2024-02-09",
+    "genres": ["reggaeton", "trap latino", "urbano latino"],
+    "albumName": "LOS MARCIANOS Vol.1: Dei V Version"
+  },
+  {
+    "_id": "1Aa54YEL20kiDPI6f4XGdS",
+    "idArtist": [
+      "7wgrXbrp9RJQMri26GZgyH",
+      "2Atk4SWx7daQtItQBa735M",
+      "1fIJZfSmqQkuqfKNRmrS1V",
+      "1jwYIyylx1XF15nbiPtLdu"
+    ],
+    "artistNames": ["Uzielito Mix", "Yeri Mua", "El Jordan 23", "Dj Kiire"],
+    "name": "Linea Del Perreo",
+    "duration": 181137,
+    "urlImage": "https://i.scdn.co/image/ab67616d0000b273e618b5d4f4df78d74a646e37",
+    "urlSong": "https://p.scdn.co/mp3-preview/0442719708f34077c4a3d7651b9c567d60e4a67a?cid=ef93c1139a084b05b496c4c209d98afc",
+    "date": "2023-12-12",
+    "genres": ["perreo", "reggaeton mexicano"],
+    "albumName": "Linea Del Perreo"
+  },
+  {
+    "_id": "7iQXYTyuG13aoeHxGG28Nh",
+    "idArtist": ["4q3ewBCX7sLwd24euuV69X", "2LRoIwlKmHjgvigdNGBHNo"],
+    "artistNames": ["Bad Bunny", "Feid"],
+    "name": "PERRO NEGRO",
+    "duration": 162767,
+    "urlImage": "https://i.scdn.co/image/ab67616d0000b2737b1fc51ff3257b5286a1ecec",
+    "urlSong": "https://p.scdn.co/mp3-preview/56ebd640e918ff135fed691da3c5697568e60a77?cid=ef93c1139a084b05b496c4c209d98afc",
+    "date": "2023-10-13",
+    "genres": ["reggaeton", "trap latino", "urbano latino"],
+    "albumName": "nadie sabe lo que va a pasar mañana"
+  },
+  {
+    "_id": "6uJDbR4EMdgMUDcm5UX9Eh",
+    "idArtist": ["3E6xrwgnVfYCrCs0ePERDz", "0eHQ9o50hj6ZDNBt6Ys1sD"],
+    "artistNames": ["Wisin", "Yandel"],
+    "name": "Perreo 101",
+    "duration": 204633,
+    "urlImage": "https://i.scdn.co/image/ab67616d0000b273f379171afc3f219592703c1e",
+    "urlSong": "https://p.scdn.co/mp3-preview/0e7968ec2f18c3971aeb135948e4b3e9406cfb91?cid=ef93c1139a084b05b496c4c209d98afc",
+    "date": "2024-04-26",
+    "genres": ["reggaeton", "urbano latino"],
+    "albumName": "Mr. W"
+  },
+  {
+    "_id": "2FXVpbS6z7ctOV55h9ozCZ",
+    "idArtist": [
+      "498rXfK2XugLjv0QoULMmi",
+      "58T7Bi0cRiCP8XL5w2lAup",
+      "3wN0Ob8OktbGnRVBaSqx8K"
+    ],
+    "artistNames": ["Quentro", "Tuna", "Kuntay Cevizci"],
+    "name": "Perreo",
+    "duration": 252000,
+    "urlImage": "https://i.scdn.co/image/ab67616d0000b2736a0aa4a3d1ef7be7f8bb1cc8",
+    "urlSong": "https://p.scdn.co/mp3-preview/6ad2d63c8e83fb60f9bda692f836326a285bfb37?cid=ef93c1139a084b05b496c4c209d98afc",
+    "date": "2024-06-07",
+    "genres": [],
+    "albumName": "Perreo"
+  }
+]

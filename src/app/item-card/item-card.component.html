@@ -1,3 +1,16 @@
-<p>
-  item-card works!
-</p>
+<ion-card class="w-[60px] h-[60px]" [id]="idSong" class="bg-transparent hover:bg-gray-900">
+
+  <ion-img alt="Silhouette of mountains" [src]="urlImage" class="w-full"></ion-img>
+
+  <ion-card-header class="bg-transparent">
+    <ion-card-title class="text-md font-bold text-white">{{songName}}</ion-card-title>
+
+    <div class="flex gap-2">
+      @for(artist of artistName; track artist){
+        <ion-card-subtitle class="text-sm text-gray-300 text-nowrap w-full whitespace-nowrap">{{artist}}</ion-card-subtitle>
+      }
+
+    </div>
+  </ion-card-header>
+
+</ion-card>

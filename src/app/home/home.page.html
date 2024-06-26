@@ -11,105 +11,12 @@
       <!-- Como hago -->
       <ion-row class="h-[40%] overflow-x-scroll flex-nowrap">
 
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-        <ion-col size="3">
-          <ion-img
-            src="../../assets/spotify-icon.svg"
-            alt="icon of spotyfake"
-            class="w-12 h-12"
-          ></ion-img>
-        </ion-col>
-
+        @for(song of songs; track song.id){
+          <ion-col size="6">
+            <item-card [songName]="song.name" [artistName]="song.artistNames" [urlImage]="song.urlImage" [idSong]="song._id"/>
+          </ion-col>
+        }
+        
       </ion-row>
 
 

@@ -13,7 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 export class LogoutPage implements OnInit {
   constructor(private router: Router) {}
 
-  public seconds: number = 10;
+  public seconds: number = 1000;
 
   ngOnInit() {
     localStorage.removeItem('token');

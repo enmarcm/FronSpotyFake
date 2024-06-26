@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div class="bg-gradient-to-b from-gray-900 to-black flex flex-col h-full">
-    <ion-grid class="flex flex-col justify-start gap-8 py-6">
+    <ion-grid class="flex flex-col justify-start gap-8 py-6 min-h-screen">
       <ion-row>
         <label class="font-extrabold text-xl">Email o nombre de usuario</label>
         <ion-input placeholder="theenmanuel123@gmail.com / enmarcm" class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
@@ -16,7 +16,6 @@
           class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
           color="success"
           [(ngModel)]="password"
-          fill="outline"
           
         >
           <ion-input-password-toggle slot="end" color="success" class="border-transparent outline-none"></ion-input-password-toggle>

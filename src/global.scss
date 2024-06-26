@@ -66,3 +66,24 @@ ion-tab-button{
     --color-selected: #69bb7b;
     --color-focused: #69bb7b; 
 }
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+ion-content::webkit-scrollbar {
+display:none !important;
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
+}
+
+* {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }

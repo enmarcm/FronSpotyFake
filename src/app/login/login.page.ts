@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, LoadingController } from '@ionic/angular';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,15 @@ export class LoginPage implements OnInit {
 
   loginService = inject(LoginService);
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (localStorage.getItem('token')) this.router.navigate(['/tabs']);
+    return;
+  }
 
-  constructor(public loadingController: LoadingController) {}
+  constructor(
+    public loadingController: LoadingController,
+    private router: Router
+  ) {}
 
   async presentLoading() {
     const loading = await this.loadingController.create({
@@ -33,7 +40,13 @@ export class LoginPage implements OnInit {
   async login() {
     try {
       await this.presentLoading();
-      await this.loginService.sendLoginRequest(this.username, this.password);
+      const result = (await this.loginService.sendLoginRequest(
+        this.username,
+        this.password
+      )) as any;
+      localStorage.setItem('token', result.token);
+      this.router.navigate(['/tabs']);
+      return;
     } catch (error) {
       console.error('Error al iniciar sesion', error);
     } finally {

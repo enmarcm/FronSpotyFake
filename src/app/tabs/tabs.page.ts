@@ -1,6 +1,6 @@
 import { Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square } from 'ionicons/icons';
+import { home, search, folder } from 'ionicons/icons';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private router: Router) {
-    addIcons({ triangle, ellipse, square });
+    addIcons({ home, search, folder });
   }
 
   ngOnInit() {

@@ -60,3 +60,9 @@ input:focus{
     outline-style: none ;
     border: none;
 }
+
+ion-tab-button{
+    --ripple-color: #69bb7b;
+    --color-selected: #69bb7b;
+    --color-focused: #69bb7b; 
+}

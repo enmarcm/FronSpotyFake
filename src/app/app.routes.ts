@@ -20,10 +20,15 @@ export const routes: Routes = [
   },
   {
     path: 'logout',
-    loadComponent: () => import('./logout/logout.page').then( m => m.LogoutPage)
+    loadComponent: () =>
+      import('./logout/logout.page').then((m) => m.LogoutPage),
   },
   {
     path: 'song/:idSong',
     redirectTo: '/tabs/home/song/:idSong',
+  },
+  {
+    path: 'artist/:idArtist',
+    redirectTo: '/tabs/home/artist/:idArtist',
   },
 ];

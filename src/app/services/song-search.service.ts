@@ -20,4 +20,20 @@ export class SongSearchService {
   getTopSongs(): Promise<any> {
     return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.TOP_SONGS));
   }
+
+  getArtistInfo(idArtist: string): Promise<any> {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST}/${idArtist}`)
+    );
+  }
+
+  getArtistAlbums(idArtist: string): Promise<any> {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}`)
+    );
+  }
+
+  getTopArtist(): Promise<any> {
+    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.GET_ARTISTS));
+  }
 }

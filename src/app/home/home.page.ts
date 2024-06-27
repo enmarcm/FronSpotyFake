@@ -38,10 +38,11 @@ export class HomePage implements OnInit {
   async ngOnInit() {
     try {
       await this.presentLoading();
-      const response = await this.songSearchService.getTopSongs();
-
+      const responseSongs = await this.songSearchService.getTopSongs();
+      const responseArtists = await this.songSearchService.getTopArtist();
       
-      this.songs = response;
+      this.songs = responseSongs;
+      this.artists = responseArtists;
     } catch (error) {
       await this.presentToastError('bottom', error);
     } finally {

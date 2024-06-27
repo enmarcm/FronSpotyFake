@@ -1,0 +1,22 @@
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="progress-container" style="width: 100%; background-color: #eee;">
+      <div class="progress-bar" [ngStyle]="{'width': progress + '%'}" style="height: 20px; background-color: #007bff;"></div>
+    </div>
+    <ion-buttons slot="start">
+      <ion-button (click)="play()">play
+        <ion-icon name="play" style="color: aliceblue;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- <div class="track-info"> -->
+      <!-- <span>Now Playing: {{currentTrack.name}}</span> -->
+    <!-- </div> -->
+    <!-- <ion-range [(ngModel)]="currentTime" [min]="0" [max]="currentTrack.duration" (ionChange)="seekTo($event)"> -->
+      <!-- <ion-icon slot="start" name="musical-notes"></ion-icon> -->
+    <!-- </ion-range> -->
+    <!-- <div class="time-info"> -->
+      <!-- <span>{{currentTime}}</span>/<span>{{currentTrack.duration}}</span> -->
+    <!-- </div> -->
+  </ion-toolbar>
+</ion-footer>

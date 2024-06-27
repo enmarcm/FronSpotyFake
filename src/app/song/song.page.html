@@ -88,18 +88,35 @@
 
       <ion-row class="px-2">
         <div class="flex gap-2 items-start">
-          @for(artist of artists; track artist.id){
-          <ion-col size="6">
-            <ion-card class="w-36 h-max">
-              <img [src]="artist.urlImage" class="w-36 h-36 object-fill" />
+          @for(artist of artists; track artist.id; let index= $index){
 
-              <ion-card-header>
-                <ion-card-title>{{artist.name}}</ion-card-title>
-
-                <ion-card-subtitle>Seguidores: {{artist.followers}}</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
+            @if(artists.length === 1){
+              <ion-col size="10">
+                <ion-card class="w-36 h-max">
+                  <img [src]="artist.urlImage" class="w-36 h-36 object-fill" />
+    
+                  <ion-card-header>
+                    <ion-card-title>{{artist.name}}</ion-card-title>
+    
+                    <ion-card-subtitle>Seguidores: {{artist.followers}}</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+            }@else{
+              <ion-col size="6">
+                <ion-card class="w-36 h-max">
+                  <img [src]="artist.urlImage" class="w-36 h-36 object-fill" />
+    
+                  <ion-card-header>
+                    <ion-card-title>{{artist.name}}</ion-card-title>
+    
+                    <ion-card-subtitle>Seguidores: {{artist.followers}}</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+            }
+            
+          
           }
         </div>
       </ion-row>

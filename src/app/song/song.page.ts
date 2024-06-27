@@ -6,12 +6,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SongSearchService } from '../services/song-search.service';
 import getDominantColorHex from 'src/utils/getColorFromUrl';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 
 interface ArtistInterface {
   id: string;
   name: string;
   followers: number;
   gneres: string[];
+  urlImage: string;
 }
 
 @Component({
@@ -19,7 +21,7 @@ interface ArtistInterface {
   templateUrl: './song.page.html',
   styleUrls: ['./song.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, PlayButtomComponent],
 })
 export class SongPage implements OnInit {
   songSearchService = inject(SongSearchService);
@@ -37,6 +39,7 @@ export class SongPage implements OnInit {
   public urlImage: string = '';
   public urlSong: string = '';
   public dominantColor: string = '';
+  public formattedDuration = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -55,12 +58,21 @@ export class SongPage implements OnInit {
       this.dominantColor = await getDominantColorHex(response.album.urlImage);
       this.idSong = response.id;
       this.name = response.name;
-      this.duration = response.duration;
       this.artists = response.artists;
       this.album = response.album;
       this.date = response.date;
       this.urlImage = response.urlImage;
       this.urlSong = response.urlSong;
+
+      // Convertir milisegundos a minutos y segundos
+      const minutes = Math.floor(this.duration / 60000);
+      const seconds = Math.floor((this.duration % 60000) / 1000);
+
+      this.duration = response.duration;
+
+      this.formattedDuration = `${minutes}:${
+        seconds < 10 ? '0' : ''
+      }${seconds}`;
     } catch (error) {
       console.error(error);
       this.router.navigate(['/tabs']);
@@ -119,6 +131,6 @@ export class SongPage implements OnInit {
 
   onScroll(event: any) {
     const scrollTop = event.detail.scrollTop;
-    this.imageSize = Math.max(100, 200 - scrollTop / 5); 
+    this.imageSize = Math.max(100, 200 - scrollTop / 5);
   }
 }

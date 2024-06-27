@@ -62,7 +62,7 @@ export class SongPage implements OnInit {
       this.album = response.album;
       this.date = response.date;
       this.urlImage = response.urlImage;
-      this.urlSong = response.urlSong;
+      this.urlSong = response.url_song;
   
       this.duration = Number(response.duration_ms);
       console.log(this.duration)

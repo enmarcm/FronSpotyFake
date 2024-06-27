@@ -24,6 +24,6 @@ export const routes: Routes = [
   },
   {
     path: 'song/:idSong',
-    loadComponent: () => import('./song/song.page').then( m => m.SongPage)
+    redirectTo: '/tabs/home/song/:idSong',
   },
 ];

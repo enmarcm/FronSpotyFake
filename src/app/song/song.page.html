@@ -44,9 +44,7 @@
       </ion-row>
 
       <ion-row class="mt-4 px-2 py-4">
-        <h3 class="font-bold text-lg text-gray-200">
-          Información de la canción
-        </h3>
+        <h3 class="text-start text-2xl text-bold">Información de la canción</h3>
       </ion-row>
 
       <ion-row class="px-2">
@@ -54,7 +52,7 @@
           <div class="flex flex-col gap-2 items-start justify-center h-full">
             <div class="flex flex-col items-start justify-center gap-1 mb-10">
               <h4 class="font-semibold text-sm text-gray-200">
-                Duración: <span>{{duration}} </span>
+                Duración: <span>{{formattedDuration}} </span>
               </h4>
 
               <h4 class="font-semibold text-sm text-gray-200">
@@ -90,11 +88,10 @@
 
       <ion-row class="px-2">
         <div class="flex gap-2 items-start">
-          
           @for(artist of artists; track artist.id){
           <ion-col size="6">
             <ion-card class="w-36 h-max">
-              <img [src]="artist.urlImage" class="w-36 h-36 object-fill"/>
+              <img [src]="artist.urlImage" class="w-36 h-36 object-fill" />
 
               <ion-card-header>
                 <ion-card-title>{{artist.name}}</ion-card-title>

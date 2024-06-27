@@ -16,4 +16,8 @@ export class SongSearchService {
       this.httpClient.get<any>(`${URL_REQUEST.GET_SONG}/${idSong}`)
     );
   }
+
+  getTopSongs(): Promise<any> {
+    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.TOP_SONGS));
+  }
 }

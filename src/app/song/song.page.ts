@@ -63,12 +63,13 @@ export class SongPage implements OnInit {
       this.date = response.date;
       this.urlImage = response.urlImage;
       this.urlSong = response.urlSong;
+  
+      this.duration = Number(response.duration_ms);
+      console.log(this.duration)
 
-      // Convertir milisegundos a minutos y segundos
       const minutes = Math.floor(this.duration / 60000);
       const seconds = Math.floor((this.duration % 60000) / 1000);
 
-      this.duration = response.duration;
 
       this.formattedDuration = `${minutes}:${
         seconds < 10 ? '0' : ''

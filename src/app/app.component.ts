@@ -3,12 +3,13 @@ import { NavigationEnd, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Subscription, filter } from 'rxjs';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MusicPlayerComponent } from './music-player/music-player.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonicModule, NavbarComponent],
+  imports: [IonicModule, NavbarComponent, MusicPlayerComponent],
 })
 export class AppComponent implements OnInit, OnDestroy {
   shouldRenderMenu: boolean;

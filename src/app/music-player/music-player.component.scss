@@ -6,6 +6,8 @@ ion-footer {
       justify-content: space-between;
       align-items: center;
       padding: 0 15px;
+      z-index: 1000;
+      position: relative;
   
       ion-buttons {
         ion-button {

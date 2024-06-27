@@ -39,6 +39,8 @@ export class HomePage implements OnInit {
     try {
       await this.presentLoading();
       const response = await this.songSearchService.getTopSongs();
+
+      
       this.songs = response;
     } catch (error) {
       await this.presentToastError('bottom', error);

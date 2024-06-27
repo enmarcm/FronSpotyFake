@@ -1,5 +1,6 @@
 import { IonicModule } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'item-card',
@@ -9,13 +10,18 @@ import { Component, Input, OnInit } from '@angular/core';
   imports: [IonicModule],
 })
 export class ItemCardComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
   @Input() songName: string = 'cancion';
-  @Input() artistName: string[] = ['artista'];
+  @Input() artistName: string[] = [];
   @Input() urlImage: string =
     'https://ionicframework.com/docs/img/demos/card-media.png';
   @Input() idSong: string = 'id';
+  @Input() redirectTo?: string = '';
+
+  public goToRoute() {
+    this.router.navigate([`${this.redirectTo}/${this.idSong}`]);
+  }
 }

@@ -1,9 +1,9 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
 
 /*
  * App Global CSS
@@ -41,65 +41,79 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.system.css";
 
-*{
-    font-family: "Roboto", sans-serif;
+* {
+  font-family: "Roboto", sans-serif;
 }
 
-ion-input{
-    outline: none;
-    color: green;
+ion-input {
+  outline: none;
+  color: green;
 }
 
-input{
-    outline-style: none;
+input {
+  outline-style: none;
 }
 
-input:focus{
-    outline-style: none ;
-    border: none;
+input:focus {
+  outline-style: none;
+  border: none;
 }
 
-ion-tab-button{
-    --ripple-color: #69bb7b;
-    --color-selected: #69bb7b;
-    --color-focused: #69bb7b; 
+ion-tab-button {
+  --ripple-color: #69bb7b;
+  --color-selected: #69bb7b;
+  --color-focused: #69bb7b;
 }
 
 ::-webkit-scrollbar {
-    display: none !important;
+  display: none !important;
 }
 
 ion-content::webkit-scrollbar {
-display:none !important;
+  display: none !important;
 }
 
 *::-webkit-scrollbar {
-    display: none !important;
+  display: none !important;
 }
 
 * {
-    --offset-bottom: auto!important;
-    --overflow: hidden;
-    overflow: auto;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
   }
+}
 
-  .marquee {
-    white-space: nowrap;
-    overflow: hidden;
-    animation: marquee 10s linear infinite;
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
   }
-  
-  @keyframes marquee {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+  100% {
+    transform: translateX(-100%);
   }
-  
+}
+
+.custom-loader-songs {
+  --background: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ) !important; /* Cambia el color y la opacidad según necesites */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #69bb7b;
+}

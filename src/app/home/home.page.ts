@@ -6,6 +6,7 @@ import songsMocks from '../../mocks/music.json';
 import artistMocks from '../../mocks/artist.json';
 import { ItemCardComponent } from '../item-card/item-card.component';
 import { ItemArtistComponent } from '../item-artist/item-artist.component';
+import albumMocks from "../../mocks/album.json";
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomePage implements OnInit {
 
   public songs: any[] = songsMocks;
   public artists: any[] = artistMocks;
+  public albums: any[] = albumMocks;
 
   ngOnInit() {}
 }

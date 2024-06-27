@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'logout',
     loadComponent: () => import('./logout/logout.page').then( m => m.LogoutPage)
   },
+  {
+    path: 'song/:idSong',
+    loadComponent: () => import('./song/song.page').then( m => m.SongPage)
+  },
 ];

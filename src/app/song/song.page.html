@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>song</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (ionScroll)="onScroll($event)">
+  <div
+    [class]="dominantColor"
+    [style.background]="getGradientStyle(dominantColor)"
+  >
+    <ion-grid class="min-h-screen">
+      <ion-row class="h-[30%] min-h-56">
+        <ion-col size="12" class="flex justify-center items-center">
+          <div
+            [ngStyle]="{'height': imageSize + 'px', 'width': imageSize + 'px'}"
+            class="flex justify-center items-center object-cover"
+          >
+            <ion-img
+              [src]="urlImage"
+              alt="icon of spotyfake"
+              class="aspect-square shadow-lg"
+            ></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="h-[20%]">
+        <ion-col size="12" class="flex justify-start items-start flex-col">
+          <ion-text
+            class="text-start flex justify-start text-2xl font-extrabold my-2"
+          >
+            <h2 class="font-extrabold font-white text-2xl text-start">
+              {{name.toLowerCase()}}
+            </h2>
+          </ion-text>
+
+          <div class="w-full">
+            @for(artist of artists; track artist.id){
+            <div class="flex">
+              <ion-text class="text-sm">
+                <h3 class="font-bold text-sm text-white">{{artist.name}}</h3>
+              </ion-text>
+            </div>
+            }
+          </div>
+
+          <ion-text>
+            <h4 class="text-sm text-gray-700">Cancion</h4>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

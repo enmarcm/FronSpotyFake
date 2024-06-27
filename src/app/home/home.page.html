@@ -27,6 +27,7 @@
             [urlImage]="song.urlImage"
             [idSong]="song._id"
             class="h-full"
+            redirectTo="/song"
           />
         </ion-col>
         }
@@ -57,6 +58,32 @@
       </ion-row>
 
       <!-- Albunes -->
+      <ion-row class="h-[5%]">
+        <ion-col size="12">
+          <ion-text>
+            <h2 class="text-white font-extrabold text-2xl text-start">
+              Nuevos lanzamientos]
+            </h2>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row class="overflow-x-scroll flex-nowrap min-h-48 h-[15%]">
+        @for(album of albums; track album.id){
+        <ion-col size="7">
+          <item-card
+            [songName]="album.name"
+            [urlImage]="album.urlImage"
+            [idSong]="album.id"
+            class="h-full"
+          />
+        </ion-col>
+        }
+      </ion-row>
+
+
+
     </ion-grid>
   </div>
 </ion-content>

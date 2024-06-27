@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="bg-gradient-to-b from-gray-900 to-black">
-    <ion-grid class="min-h-screen p-0 m-0" >
+    <ion-grid class="min-h-screen p-0 m-0">
       <ion-row class="h-[30%] w-full m-0 p-0">
         <ion-col size="12" class="flex justify-center items-center">
           <div
@@ -29,6 +29,7 @@
                 <h3 class="text-sm text-gray-300">{{genre}}</h3>
                 }
               </div>
+              <h3><span class="font-bold">Followers </span> {{followers}}</h3>
             </div>
           </div>
         </ion-col>
@@ -42,11 +43,17 @@
           <ion-card-content>
             <ion-list>
               @for(song of songs; track song.id){
-              <ion-item [id]="song.id" class="flex items-center justify-start flex-col">
+              <ion-item
+                [id]="song.id"
+                class="flex items-center justify-start flex-col"
+              >
                 <ion-thumbnail slot="start">
-                  <img [src]="song.urlImage" class="object-cover rounded-md shadow-md" />
+                  <img
+                    [src]="song.urlImage"
+                    class="object-cover rounded-md shadow-md"
+                  />
                 </ion-thumbnail>
-                <ion-label >{{song.name}}</ion-label>
+                <ion-label>{{song.name}}</ion-label>
               </ion-item>
               }
             </ion-list>
@@ -62,9 +69,15 @@
           <ion-card-content>
             <ion-list>
               @for(album of albums; track album.id){
-              <ion-item [id]="album.id" class="flex items-center justify-start flex-col">
+              <ion-item
+                [id]="album.id"
+                class="flex items-center justify-start flex-col"
+              >
                 <ion-thumbnail slot="start">
-                  <img [src]="album.urlImage" class="object-cover rounded-md shadow-md" />
+                  <img
+                    [src]="album.urlImage"
+                    class="object-cover rounded-md shadow-md"
+                  />
                 </ion-thumbnail>
                 <ion-label>{{album.name}}</ion-label>
               </ion-item>

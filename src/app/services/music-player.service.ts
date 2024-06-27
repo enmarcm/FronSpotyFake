@@ -1,60 +1,82 @@
-// music-player.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MusicPlayerService {
-    private audio = new Audio();
-    private isPlaying = false;
-    private playStatus = new BehaviorSubject<boolean>(this.isPlaying);
-    public playStatus$ = this.playStatus.asObservable();
-    private currentTimeSource = new BehaviorSubject<number>(0);
-    currentTime$ = this.currentTimeSource.asObservable();
-    private durationSource = new BehaviorSubject<number>(0);
-    duration$ = this.durationSource.asObservable();
-  
-    constructor() {}
-  
-    play(url: string) {
-      if (!this.isPlaying) {
-        if (this.audio.src !== url) { // If a new track, set the source
-          this.audio.src = url;
-          this.audio.load();
-          this.audio.onloadedmetadata = () => {
-              this.durationSource.next(this.audio.duration);
-              console.log(this.audio.duration)
-            };
+  private audio = new Audio();
+  private isPlaying = false;
+  private playStatus = new BehaviorSubject<boolean>(this.isPlaying);
+  public playStatus$ = this.playStatus.asObservable();
+  private currentTimeSource = new BehaviorSubject<number>(0);
+  currentTime$ = this.currentTimeSource.asObservable();
+  private durationSource = new BehaviorSubject<number>(0);
+  duration$ = this.durationSource.asObservable();
 
-            this.audio.ontimeupdate = () => {
-                this.currentTimeSource.next(this.audio.currentTime);
-              };
-        }
-      
-        this.audio.play().then(() => {
-          this.isPlaying = true;
-          this.playStatus.next(this.isPlaying);
-        }).catch(error => console.error("Error playing audio:", error));
-      } else {
-        this.pause();
-      }
-    }
-  
-    pause() {
+  constructor(private loadingController: LoadingController) {}
+
+  async play(url: string) {
+    if (this.audio.src === url) {
       this.audio.pause();
-      this.isPlaying = false;
-      this.playStatus.next(this.isPlaying);
+      this.audio.currentTime = 0;
     }
   
-    // Optionally, if you need a method to directly resume the audio
-    resume() {
-      if (!this.isPlaying && this.audio.src) {
-        this.audio.play().then(() => {
-          this.isPlaying = true;
-          this.playStatus.next(this.isPlaying);
-        }).catch(error => console.error("Error resuming audio:", error));
-      }
+    this.audio.src = url;
+    await this.presentLoading();
+    try {
+      await this.loadAudio(); 
+      await this.dismissLoading();
+      await this.startPlayback(); // Inicia la reproducción
+    } catch (error) {
+      console.error("Error during audio playback:", error);
+      await this.dismissLoading();
     }
-
   }
+
+  private async loadAudio() {
+    return new Promise((resolve, reject) => {
+      this.audio.load();
+      this.audio.onloadedmetadata = () => {
+        this.durationSource.next(this.audio.duration);
+        resolve(true);
+      };
+      this.audio.onerror = reject;
+      this.audio.ontimeupdate = () => {
+        this.currentTimeSource.next(this.audio.currentTime);
+      };
+    });
+  }
+
+  private async startPlayback() {
+    try {
+      await this.audio.play();
+      this.isPlaying = true;
+      this.playStatus.next(this.isPlaying);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  pause() {
+    this.audio.pause();
+    this.isPlaying = false;
+    this.playStatus.next(this.isPlaying);
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      translucent: false,
+      animated: true,
+      spinner: 'lines-sharp',
+      cssClass: 'custom-loader-songs',
+    });
+
+    return await loading.present();
+  }
+
+  async dismissLoading() {
+    return await this.loadingController.dismiss();
+  }
+}

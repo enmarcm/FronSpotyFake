@@ -36,4 +36,8 @@ export class SongSearchService {
   getTopArtist(): Promise<any> {
     return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.GET_ARTISTS));
   }
+
+  getNewAlbums(): Promise<any> {
+    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.NEW_ALBUMS));
+  }
 }

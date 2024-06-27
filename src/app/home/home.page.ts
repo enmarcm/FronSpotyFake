@@ -40,9 +40,12 @@ export class HomePage implements OnInit {
       await this.presentLoading();
       const responseSongs = await this.songSearchService.getTopSongs();
       const responseArtists = await this.songSearchService.getTopArtist();
-      
+      const responseAlbums = await this.songSearchService.getNewAlbums();
+
       this.songs = responseSongs;
       this.artists = responseArtists;
+      this.albums = responseAlbums;
+      await this.presentToastSuccess('bottom');
     } catch (error) {
       await this.presentToastError('bottom', error);
     } finally {
@@ -75,6 +78,18 @@ export class HomePage implements OnInit {
       position: position,
       color: 'danger',
       icon: 'close-circle-outline',
+    });
+
+    await toast.present();
+  }
+
+  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+    const toast = await this.toastController.create({
+      message: `Ha cargado con éxito!`,
+      duration: 1500,
+      position: position,
+      color: 'success',
+      icon: 'checkmark-circle-outline',
     });
 
     await toast.present();

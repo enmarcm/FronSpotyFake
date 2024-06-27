@@ -26,27 +26,25 @@ export class ArtistPage implements OnInit {
   }
 
   idArtist: string = '';
-  @Input() name = 'Artist Name';
-  @Input() followers = 1000;
-  @Input() genres = ['Pop', 'Rock'];
-  @Input() urlImage =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8UFbxh334RXgpDITCay2xTUkyOvTqJpmFag&s';
+  @Input() name = '';
+  @Input() genres = [];
+  @Input() urlImage = '';
   @Input() songs: songType[] = [
     {
-      urlImage:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8UFbxh334RXgpDITCay2xTUkyOvTqJpmFag&s',
-      name: 'Song Name',
-      id: '1',
+      urlImage: '',
+      name: '',
+      id: '',
     },
   ];
   @Input() albums: albumType[] = [
     {
-      urlImage:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8UFbxh334RXgpDITCay2xTUkyOvTqJpmFag&s',
-      name: 'Album Name',
-      id: '1',
+      urlImage: '',
+      name: '',
+      id: '',
     },
   ];
+
+  @Input() followers: number = 0;
 
   async ngOnInit() {
     try {

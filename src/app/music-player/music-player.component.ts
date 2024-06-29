@@ -1,24 +1,50 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { play, pause } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JoinArtistsPipe } from '../services/joinArtists';
 import { MusicPlayerService } from '../services/music-player.service';
 import { CommonModule } from '@angular/common';
+import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
+import { SharedDataService } from '../services/shared-data.service';
+
+interface ArtistInterface {
+  id: string;
+  name: string;
+  followers: number;
+  gneres: string[];
+  urlImage: string;
+}
 
 @Component({
   selector: 'app-music-player',
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.scss'],
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, PlayButtomComponent, JoinArtistsPipe],
   standalone: true,
 })
 export class MusicPlayerComponent  implements OnInit {
+  songUrl: string = "";
   isPlaying: boolean = false;
-  duration: number = 0;
-  currentTime: number = 0;
-  progress: number = 0;
+  public idSong: string = '';
+  public name: string = '';
+  public duration: number = 0;
+  public artists: Array<ArtistInterface> = [];
+  public album: {
+    name: string;
+    urlImage: string;
+    id: string;
+  } = {} as any;
+  public date: string = '';
+  public urlImage: string = '';
+  public urlSong: string = '';
+  public dominantColor: string = '';
+  public formattedDuration = '';
 
-  constructor(private musicPlayerService: MusicPlayerService) { 
+  constructor(private musicPlayerService: MusicPlayerService,
+    private sharedDataService: SharedDataService,
+  ) { 
     addIcons({ play, pause });
   }
 
@@ -26,17 +52,19 @@ export class MusicPlayerComponent  implements OnInit {
     this.musicPlayerService.playStatus$.subscribe(status => {
       this.isPlaying = status;
     });
-
-    this.musicPlayerService.currentTime$.subscribe(currentTime => {
-      this.currentTime = currentTime;
-      this.progress = (this.currentTime / this.duration) * 100;
-      // console.log(this.duration)
-    })
+    this.sharedDataService.currentUrlSong.subscribe(url => this.urlSong = url);
+    this.sharedDataService.currentArtists.subscribe(artists => this.artists = artists);
+    this.sharedDataService.currentSongName.subscribe(name => this.name = name);
+    this.sharedDataService.currentTrackPhoto.subscribe(photo => this.urlImage = photo);
   }
   
-  play() {
-    const url = 'https://p.scdn.co/mp3-preview/b9b7e4c982b33ee23c4867f7a3025e3598c35760?cid=cfe923b2d660439caf2b557b21f31221'; // This should come from your track list
-    this.musicPlayerService.play(url);
+  togglePlayPause() { // Accept songUrl as an argument
+    this.isPlaying = !this.isPlaying;
+    if (this.isPlaying && this.urlSong) { // Check if songUrl is defined
+      this.musicPlayerService.play(this.urlSong); // Play the song using the provided URL
+    } else {
+      this.musicPlayerService.pause(); // Pause the song
+    }
   }
 
   pause() {

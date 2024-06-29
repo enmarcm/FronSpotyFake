@@ -13,6 +13,7 @@ import { MusicPlayerComponent } from './music-player/music-player.component';
 })
 export class AppComponent implements OnInit, OnDestroy {
   shouldRenderMenu: boolean;
+  selectedSongUrl: string= "";
   private routerSubscription: Subscription = new Subscription();
 
   constructor(private router: Router) {
@@ -38,6 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+  }
+
+  selectSong(url: string) {
+    this.selectedSongUrl = url;
+    // You might also want to ensure shouldRenderMenu is true here
   }
 
   private updateMenuVisibility() {

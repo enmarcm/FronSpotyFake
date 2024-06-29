@@ -46,6 +46,7 @@
               <ion-item
                 [id]="song.id"
                 class="flex items-center justify-start flex-col"
+                (click)="goToSong(song.id)"
               >
                 <ion-thumbnail slot="start">
                   <img
@@ -72,6 +73,7 @@
               <ion-item
                 [id]="album.id"
                 class="flex items-center justify-start flex-col"
+                (click)="goToAlbum(album.id)"
               >
                 <ion-thumbnail slot="start">
                   <img

@@ -8,5 +8,6 @@ export enum URL_REQUEST{
     GET_ARTIST = `${BASE_URL}/artist/getId`,
     GET_ARTISTS = `${BASE_URL}/artist/getAll`,
     GET_ARTIST_ALBUMS = `${BASE_URL}/album/artist`,
-    NEW_ALBUMS = `${BASE_URL}/album/top`
+    NEW_ALBUMS = `${BASE_URL}/album/top`,
+    GET_ALBUM = `${BASE_URL}/album/getId`,
 }

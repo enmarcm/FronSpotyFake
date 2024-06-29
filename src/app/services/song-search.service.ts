@@ -29,7 +29,7 @@ export class SongSearchService {
 
   getArtistAlbums(idArtist: string): Promise<any> {
     return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}`)
+      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}?limit=6`)
     );
   }
 
@@ -39,5 +39,11 @@ export class SongSearchService {
 
   getNewAlbums(): Promise<any> {
     return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.NEW_ALBUMS));
+  }
+
+  getAlbumInfo(idAlbum: string): Promise<any> {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${URL_REQUEST.GET_ALBUM}/${idAlbum}`)
+    );
   }
 }

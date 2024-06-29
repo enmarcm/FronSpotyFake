@@ -129,6 +129,15 @@ export class ArtistPage implements OnInit {
   async dismissLoading() {
     return await this.loadingController.dismiss();
   }
+
+  goToSong(idSong: string) {
+    this.router.navigate(['/song', idSong]);
+  }
+
+  goToAlbum(idAlbum: string) {
+    this.router.navigate(['/album', idAlbum]);
+  
+  }
 }
 
 interface songType {

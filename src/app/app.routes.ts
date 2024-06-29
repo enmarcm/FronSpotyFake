@@ -31,4 +31,9 @@ export const routes: Routes = [
     path: 'artist/:idArtist',
     redirectTo: '/tabs/home/artist/:idArtist',
   },
+  {
+    path: 'album/:idAlbum',
+    redirectTo: '/tabs/home/album/:idAlbum',
+  },
+  
 ];

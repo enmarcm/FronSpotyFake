@@ -65,7 +65,6 @@ export class SongPage implements OnInit {
       this.urlSong = response.url_song;
   
       this.duration = Number(response.duration_ms);
-      console.log(this.duration)
 
       const minutes = Math.floor(this.duration / 60000);
       const seconds = Math.floor((this.duration % 60000) / 1000);
@@ -80,6 +79,10 @@ export class SongPage implements OnInit {
     } finally {
       this.dismissLoading();
     }
+  }
+
+  goToArtist(idArtist: string) {
+    this.router.navigate([`/artist/${idArtist}`]);
   }
 
   getGradientStyle(color: string): string {

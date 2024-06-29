@@ -31,7 +31,7 @@ export const routes: Routes = [
       {
         path: 'search',
         loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../search/search.page').then((m) => m.SearchPage),
       },
       {
         path: 'folder',

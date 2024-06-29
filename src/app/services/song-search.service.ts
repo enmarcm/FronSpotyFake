@@ -46,4 +46,8 @@ export class SongSearchService {
       this.httpClient.get<any>(`${URL_REQUEST.GET_ALBUM}/${idAlbum}`)
     );
   }
+
+  getGenres(): Promise<any> {
+    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.GET_GENRES));
+  }
 }

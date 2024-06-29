@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>search</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated="true" [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="flex flex-wrap px-4 py-2">
+  @for(genre of genres; track genre ){
+    <ion-card color="primary" class="w-1/3">
+      <ion-card-header>
+        <ion-card-title>{{genre}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  }
+</ion-content>

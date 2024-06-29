@@ -35,5 +35,9 @@ export const routes: Routes = [
     path: 'album/:idAlbum',
     redirectTo: '/tabs/home/album/:idAlbum',
   },
+  {
+    path: 'search',
+    loadComponent: () => import('./search/search.page').then( m => m.SearchPage)
+  },
   
 ];

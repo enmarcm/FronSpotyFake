@@ -14,10 +14,14 @@ export class MusicPlayerService {
   currentTime$ = this.currentTimeSource.asObservable();
   private durationSource = new BehaviorSubject<number>(0);
   duration$ = this.durationSource.asObservable();
+  private songUrlSource = new BehaviorSubject<string | null>(null);
+  public songUrl$ = this.songUrlSource.asObservable();
 
   constructor(private loadingController: LoadingController) {}
 
   async play(url: string) {
+    this.songUrlSource.next(url);
+
     if (this.audio.src === url) {
       this.audio.pause();
       this.audio.currentTime = 0;
@@ -78,5 +82,17 @@ export class MusicPlayerService {
 
   async dismissLoading() {
     return await this.loadingController.dismiss();
+  }
+
+  resume() {
+    if (!this.isPlaying && this.audio.src) {
+      this.audio.play();
+      this.isPlaying = true;
+      this.playStatus.next(this.isPlaying);
+    }
+  }
+
+  changeCurrentTime(time: number) {
+    this.audio.currentTime = time;
   }
 }

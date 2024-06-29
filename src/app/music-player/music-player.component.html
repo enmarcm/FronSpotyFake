@@ -1,26 +1,37 @@
-<ion-footer class="w-[95%] flex justify-center rounded-md shadow-lg mx-auto">
+@if(isShow()){
+<ion-footer
+  class="w-[95%] flex justify-center rounded-md shadow-lg mx-auto opacity-85"
+>
   <ion-toolbar>
-    <div class="progress-container" style="width: 100%; background-color: #eee;">
-      <!-- Progress bar -->
-    </div>
+    <!-- <div class="progress-container" style="width: 100%; background-color: #eee;"> -->
+    <!-- <ion-range min="0" [max]="duration" [(ngModel)]="currentAudioPosition" (ionChange)="changeCurrentTime($event)">
+          <ion-icon size="small" slot="start" name="musical-notes"></ion-icon>
+          <ion-icon slot="end" name="musical-note"></ion-icon>
+        </ion-range> -->
+    <!-- </div> -->
     <div class="flex items-center justify-between w-full p-2">
-      <!-- Adjusted for perfect fit with padding and full width -->
       <div class="flex-shrink-0">
-        <!-- Prevents the button from taking more space than necessary -->
         <ion-buttons slot="start">
           <ion-button (click)="togglePlayPause()">
-            <ion-icon name="play" style="color: aliceblue;"></ion-icon>
+            <ion-icon
+              [name]="isPlaying ? 'pause' : 'play'"
+              style="color: aliceblue"
+            ></ion-icon>
           </ion-button>
         </ion-buttons>
       </div>
       <div class="flex items-center justify-start flex-grow">
-        <!-- Allows photo and text to grow as needed -->
-        <img [src]="urlImage" alt="Track photo" class="h-12 w-12 rounded-full mr-2"> <!-- Responsive image with margin -->
+        <img [src]="urlImage" class="h-12 w-12 rounded-full mr-2" />
         <div class="flex flex-col">
-          <span class="text-sm truncate">Now Playing: {{name}}</span> <!-- Truncate long names -->
-          <span class="text-xs truncate">Artists: {{artists | joinArtists}}</span> <!-- Truncate long artist names -->
+          <span class="text-sm truncate">Now Playing: {{ name }}</span>
+          <span class="text-xs truncate"
+            >Artists: {{ artists | joinArtists }}</span
+          >
         </div>
       </div>
     </div>
   </ion-toolbar>
 </ion-footer>
+}@else{
+<div></div>
+}

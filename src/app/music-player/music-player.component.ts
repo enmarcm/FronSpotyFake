@@ -1,13 +1,13 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { play, pause } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { ActivatedRoute, Router } from '@angular/router';
 import { JoinArtistsPipe } from '../services/joinArtists';
 import { MusicPlayerService } from '../services/music-player.service';
 import { CommonModule } from '@angular/common';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 import { SharedDataService } from '../services/shared-data.service';
+import { FormsModule } from '@angular/forms';
 
 interface ArtistInterface {
   id: string;
@@ -21,11 +21,17 @@ interface ArtistInterface {
   selector: 'app-music-player',
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.scss'],
-  imports: [IonicModule, CommonModule, PlayButtomComponent, JoinArtistsPipe],
+  imports: [
+    IonicModule,
+    CommonModule,
+    PlayButtomComponent,
+    JoinArtistsPipe,
+    FormsModule,
+  ],
   standalone: true,
 })
-export class MusicPlayerComponent  implements OnInit {
-  songUrl: string = "";
+export class MusicPlayerComponent implements OnInit {
+  songUrl: string = '';
   isPlaying: boolean = false;
   public idSong: string = '';
   public name: string = '';
@@ -41,27 +47,48 @@ export class MusicPlayerComponent  implements OnInit {
   public urlSong: string = '';
   public dominantColor: string = '';
   public formattedDuration = '';
+  public currentAudioPosition = 0;
 
-  constructor(private musicPlayerService: MusicPlayerService,
-    private sharedDataService: SharedDataService,
-  ) { 
+  constructor(
+    private musicPlayerService: MusicPlayerService,
+    private sharedDataService: SharedDataService
+  ) {
     addIcons({ play, pause });
   }
 
+  isShow() {
+    return (
+      this.songUrl != null && this.songUrl != '' && this.songUrl != undefined
+    );
+  }
+
   ngOnInit() {
-    this.musicPlayerService.playStatus$.subscribe(status => {
+    this.musicPlayerService.songUrl$.subscribe((url) => {
+      if (!url || url === null) return;
+
+      this.songUrl = url;
+    });
+    this.musicPlayerService.playStatus$.subscribe((status) => {
       this.isPlaying = status;
     });
-    this.sharedDataService.currentUrlSong.subscribe(url => this.urlSong = url);
-    this.sharedDataService.currentArtists.subscribe(artists => this.artists = artists);
-    this.sharedDataService.currentSongName.subscribe(name => this.name = name);
-    this.sharedDataService.currentTrackPhoto.subscribe(photo => this.urlImage = photo);
+    this.sharedDataService.currentUrlSong.subscribe(
+      (url) => (this.urlSong = url)
+    );
+    this.sharedDataService.currentArtists.subscribe(
+      (artists) => (this.artists = artists)
+    );
+    this.sharedDataService.currentSongName.subscribe(
+      (name) => (this.name = name)
+    );
+    this.sharedDataService.currentTrackPhoto.subscribe(
+      (photo) => (this.urlImage = photo)
+    );
   }
-  
-  togglePlayPause() { // Accept songUrl as an argument
+
+  togglePlayPause() {
     this.isPlaying = !this.isPlaying;
-    if (this.isPlaying && this.urlSong) { // Check if songUrl is defined
-      this.musicPlayerService.play(this.urlSong); // Play the song using the provided URL
+    if (this.isPlaying && this.urlSong) {
+      this.musicPlayerService.resume();
     } else {
       this.musicPlayerService.pause(); // Pause the song
     }
@@ -71,5 +98,8 @@ export class MusicPlayerComponent  implements OnInit {
     this.musicPlayerService.pause();
   }
 
-
+  changeCurrentTime(event: any) {
+    this.currentAudioPosition = event.detail.value;
+    this.musicPlayerService.changeCurrentTime(this.currentAudioPosition);
+  }
 }

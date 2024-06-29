@@ -94,7 +94,7 @@
           @if(artists.length === 1){
           <ion-col size="10" (click)="goToArtist(artist.id)">
             <ion-card class="w-36 h-max">
-              <img [src]="artist.urlImage" class="w-36 h-36 object-fill" />
+              <img [src]="artist.imageUrl" class="w-36 h-36 object-fill" />
 
               <ion-card-header>
                 <ion-card-title>{{artist.name}}</ion-card-title>
@@ -104,7 +104,7 @@
           }@else{
           <ion-col size="6" (click)="goToArtist(artist.id)">
             <ion-card class="w-36 h-max">
-              <img [src]="artist.urlImage" class="w-36 h-36 object-fill" />
+              <img [src]="artist.imageUrl" class="w-36 h-36 object-fill" />
 
               <ion-card-header>
                 <ion-card-title>{{artist.name}}</ion-card-title>

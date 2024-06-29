@@ -7,6 +7,7 @@ import { SongSearchService } from '../services/song-search.service';
 import getDominantColorHex from 'src/utils/getColorFromUrl';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
+import { SharedDataService } from '../services/shared-data.service';
 
 interface ArtistInterface {
   id: string;
@@ -45,7 +46,8 @@ export class SongPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     public loadingController: LoadingController,
     public toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private sharedDataService: SharedDataService
   ) {
     this.idSong = this.activatedRoute.snapshot.paramMap.get('idSong') || '';
   }
@@ -63,9 +65,13 @@ export class SongPage implements OnInit {
       this.date = response.date;
       this.urlImage = response.urlImage;
       this.urlSong = response.url_song;
+      this.sharedDataService.changeUrlSong(this.urlSong);
+      this.sharedDataService.changeArtists(this.artists);
+      this.sharedDataService.changeSongName(this.name);
+      this.sharedDataService.changeTrackPhoto(this.urlImage);
   
       this.duration = Number(response.duration_ms);
-      console.log(this.duration)
+      console.log(this.urlSong)
 
       const minutes = Math.floor(this.duration / 60000);
       const seconds = Math.floor((this.duration % 60000) / 1000);

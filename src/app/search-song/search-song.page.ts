@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { LoadingController, ToastController } from '@ionic/angular';
+import {
+  IonicModule,
+  LoadingController,
+  ToastController,
+} from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,14 +17,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class SearchSongPage implements OnInit, AfterViewInit {
-  songSearchService = inject(SongSearchService);
   public name: string = '';
-  private loader: any;
-  public songs: any = [];
-
-  private page: number = 1;
+  private loader: HTMLElement | null = null;
+  public songs: any[] = [];
+  private page: number = 0;
+  private isLoading: boolean = false;
+  private observer: IntersectionObserver | null = null;
+  private isFirstLoad: boolean = true;
 
   constructor(
+    private songSearchService: SongSearchService,
     public loadingController: LoadingController,
     public toastController: ToastController,
     private router: Router,
@@ -32,61 +37,70 @@ export class SearchSongPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loader = document.getElementById('loader');
+    this.setupIntersectionObserver();
   }
 
   async ngOnInit() {
+    await this.loadSongs();
+  }
+
+  async loadSongs() {
+    if (this.isLoading) return;
+    this.isLoading = true;
     try {
       await this.presentLoading();
       await this.obtainNewSongs();
-      await this.setupIntersectionObserver();
     } catch (error) {
       await this.presentToastError('bottom', error);
       this.router.navigate(['/search']);
     } finally {
       await this.dismissLoading();
+      this.isLoading = false;
+      if (this.isFirstLoad) {
+        this.isFirstLoad = false;
+      }
     }
-  }
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
   }
 
   async obtainNewSongs() {
-    try {
-      this.page += 1;
-      const response = await this.songSearchService.getSongByName(
-        this.name,
-        this.page
-      );
+    this.page += 1;
 
-      this.songs = [...this.songs, ...response] as any;
-
-    } catch (error) {
-      await this.presentToastError('bottom', error);
+    const response = await this.songSearchService.getSongByName(
+      this.name,
+      this.page
+    );
+    if (response.length > 0) {
+      this.songs = [...this.songs, ...response];
+    } else {
+      await this.presentToastError('bottom', 'No more songs to load');
+      if (this.observer) this.observer.disconnect();
+      return;
     }
   }
 
-  private async setupIntersectionObserver() {
+  private setupIntersectionObserver() {
     const options = {
       root: null,
       rootMargin: '0px',
       threshold: 0.25,
     };
 
-    const observer = new IntersectionObserver(async ([entry]) => {
+    this.observer = new IntersectionObserver(async ([entry]) => {
       if (entry.isIntersecting) {
-        await this.obtainNewSongs();
-      await this.presentToastSuccess('bottom');
-
+        await this.loadSongs();
       }
     }, options);
 
-    if (!this.loader) return;
-    observer.observe(this.loader);
+    if (this.loader) this.observer.observe(this.loader);
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) this.observer.disconnect();
   }
 
   async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
     const toast = await this.toastController.create({
-      message: `Cargaron las canciones`,
+      message: `Songs loaded successfully`,
       duration: 500,
       position: position,
       color: 'success',
@@ -101,7 +115,7 @@ export class SearchSongPage implements OnInit, AfterViewInit {
     error: any
   ) {
     const toast = await this.toastController.create({
-      message: `Error al cargar las canciones: ${error}`,
+      message: `Error loading songs: ${error}`,
       duration: 500,
       position: position,
       color: 'danger',
@@ -120,5 +134,9 @@ export class SearchSongPage implements OnInit, AfterViewInit {
     });
 
     return await loading.present();
+  }
+
+  async dismissLoading() {
+    return await this.loadingController.dismiss();
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { URL_REQUEST } from 'src/constants';
 
 @Injectable({
@@ -29,7 +29,9 @@ export class SongSearchService {
 
   getArtistAlbums(idArtist: string): Promise<any> {
     return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}?limit=6`)
+      this.httpClient.get<any>(
+        `${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}?limit=6`
+      )
     );
   }
 
@@ -53,13 +55,25 @@ export class SongSearchService {
 
   getSongsByGenre(genre: string, page: number = 1): Promise<any> {
     return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_SONGS_BY_GENRE}/${genre}?page=${page}`)
+      this.httpClient.get<any>(
+        `${URL_REQUEST.GET_SONGS_BY_GENRE}/${genre}?page=${page}`
+      )
     );
   }
 
-  getSongByName(name: string, page: number=1): Promise<any> {
-    return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_SONGS_BY_NAME}/${name}?page=${page}`)
-    )
+  getSongByName(name: string, page: number = 1): Promise<any> {
+    const peticion = `${URL_REQUEST.GET_SONGS_BY_NAME}/${name}?page=${page}`
+    
+    console.log(peticion)
+    
+    const result = firstValueFrom(
+      this.httpClient.get<any>(
+        peticion
+      )
+    );
+
+    console.log(result);
+
+    return result;
   }
 }

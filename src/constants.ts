@@ -12,4 +12,5 @@ export enum URL_REQUEST{
     GET_ALBUM = `${BASE_URL}/album/getId`,
     GET_GENRES = `${BASE_URL}/songs/genres`,
     GET_SONGS_BY_GENRE = `${BASE_URL}/songs/getByGenre`,
+    GET_SONGS_BY_NAME = `${BASE_URL}/songs`,
 }

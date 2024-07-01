@@ -56,4 +56,10 @@ export class SongSearchService {
       this.httpClient.get<any>(`${URL_REQUEST.GET_SONGS_BY_GENRE}/${genre}?page=${page}`)
     );
   }
+
+  getSongByName(name: string, page: number=1): Promise<any> {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${URL_REQUEST.GET_SONGS_BY_NAME}/${name}?page=${page}`)
+    )
+  }
 }

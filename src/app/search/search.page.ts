@@ -39,7 +39,7 @@ export class SearchPage implements OnInit {
 
   handleInput(event: any) {
     const query = event.target.value.toLowerCase();
-    console.log(query);
+    this.search(query);
   }
 
   async presentLoading() {
@@ -85,5 +85,9 @@ export class SearchPage implements OnInit {
 
   redirectToGenre(genre: string) {
     this.router.navigate(['/songGenre', genre]);
+  }
+
+  async search(name: string){
+    this.router.navigate(['/searchSong', name]);
   }
 }

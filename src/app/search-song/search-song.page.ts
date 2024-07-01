@@ -7,14 +7,19 @@ import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-genre-song',
-  templateUrl: './genre-song.page.html',
-  styleUrls: ['./genre-song.page.scss'],
+  selector: 'app-search-song',
+  templateUrl: './search-song.page.html',
+  styleUrls: ['./search-song.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule],
 })
-export class GenreSongPage implements OnInit, AfterViewInit {
+export class SearchSongPage implements OnInit, AfterViewInit {
   songSearchService = inject(SongSearchService);
+  public name: string = '';
+  private loader: any;
+  public songs: any = [];
+
+  private page: number = 1;
 
   constructor(
     public loadingController: LoadingController,
@@ -22,24 +27,11 @@ export class GenreSongPage implements OnInit, AfterViewInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.genre = this.activatedRoute.snapshot.paramMap.get('genre') || '';
+    this.name = this.activatedRoute.snapshot.paramMap.get('name') || '';
   }
 
-  private loader: any
-  public genre: string = '';
-  public songs: [
-    {
-      id: string;
-      name: string;
-      urlImage: string;
-      artists: Array<any>;
-      urlSong: string;
-    }
-  ] = [] as any;
-  private page: number = 1;
-
   ngAfterViewInit(): void {
-    this.loader = document.getElementById('loader')
+    this.loader = document.getElementById('loader');
   }
 
   async ngOnInit() {
@@ -47,14 +39,49 @@ export class GenreSongPage implements OnInit, AfterViewInit {
       await this.presentLoading();
       await this.obtainNewSongs();
       await this.setupIntersectionObserver();
-      await this.presentToastSuccess('bottom');
-
     } catch (error) {
       await this.presentToastError('bottom', error);
       this.router.navigate(['/search']);
     } finally {
       await this.dismissLoading();
     }
+  }
+  async dismissLoading() {
+    return await this.loadingController.dismiss();
+  }
+
+  async obtainNewSongs() {
+    try {
+      this.page += 1;
+      const response = await this.songSearchService.getSongByName(
+        this.name,
+        this.page
+      );
+
+      this.songs = [...this.songs, ...response] as any;
+
+    } catch (error) {
+      await this.presentToastError('bottom', error);
+    }
+  }
+
+  private async setupIntersectionObserver() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.25,
+    };
+
+    const observer = new IntersectionObserver(async ([entry]) => {
+      if (entry.isIntersecting) {
+        await this.obtainNewSongs();
+      await this.presentToastSuccess('bottom');
+
+      }
+    }, options);
+
+    if (!this.loader) return;
+    observer.observe(this.loader);
   }
 
   async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
@@ -94,41 +121,4 @@ export class GenreSongPage implements OnInit, AfterViewInit {
 
     return await loading.present();
   }
-
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
-
-  async obtainNewSongs() {
-    try {
-      this.page += 1;
-      const response = await this.songSearchService.getSongsByGenre(
-        this.genre,
-        this.page
-      );
-
-      this.songs = [...this.songs, ...response] as any;
-
-    } catch (error) {
-      await this.presentToastError('bottom', error);
-    }
-  }
-
-  private async  setupIntersectionObserver() {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.25,
-    };
-
-    const observer = new IntersectionObserver(async ([entry]) => {
-      if (entry.isIntersecting) {
-        await this.obtainNewSongs();
-      }
-    }, options);
-
-    if (!this.loader) return;
-    observer.observe(this.loader);
-  }
-
 }

@@ -43,5 +43,9 @@ export const routes: Routes = [
     path: 'songGenre/:genre',
     redirectTo: '/tabs/search/songGenre/:genre',
   },
+  {
+    path: 'searchSong/:name',
+    redirectTo: '/tabs/search/searchSong/:name',
+  },
   
 ];

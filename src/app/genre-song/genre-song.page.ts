@@ -33,6 +33,8 @@ export class GenreSongPage implements OnInit, AfterViewInit {
       id: string;
       name: string;
       urlImage: string;
+      artists: Array<any>;
+      urlSong: string;
     }
   ] = [] as any;
   private page: number = 10;

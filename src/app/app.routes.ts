@@ -37,7 +37,11 @@ export const routes: Routes = [
   },
   {
     path: 'search',
-    loadComponent: () => import('./search/search.page').then( m => m.SearchPage)
+    redirectTo: '/tabs/search',
+  },
+  {
+    path: 'songGenre/:genre',
+    redirectTo: '/tabs/search/songGenre/:genre',
   },
   
 ];

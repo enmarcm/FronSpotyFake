@@ -25,10 +25,15 @@ export class SearchPage implements OnInit {
 
   async ngOnInit() {
     try {
+      await this.presentLoading();
       const response = await this.songSearchService.getGenres();
+      console.log(response);
       this.genres = response;
     } catch (error) {
       console.error(error);
+      await this.presentToastError('bottom', error);
+    } finally {
+      await this.dismissLoading();
     }
   }
 
@@ -65,5 +70,20 @@ export class SearchPage implements OnInit {
 
   async dismissLoading() {
     return await this.loadingController.dismiss();
+  }
+
+  colors = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'];
+
+  getRandomColor(genre: string) {
+    const genreIndex = this.genres.indexOf(genre);
+    if (genreIndex === -1) {
+      return 'default'; // Retorna un color predeterminado si el género no se encuentra
+    }
+    const colorIndex = genreIndex % this.colors.length;
+    return this.colors[colorIndex];
+  }
+
+  redirectToGenre(genre: string) {
+    this.router.navigate(['/songGenre', genre]);
   }
 }

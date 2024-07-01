@@ -50,4 +50,10 @@ export class SongSearchService {
   getGenres(): Promise<any> {
     return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.GET_GENRES));
   }
+
+  getSongsByGenre(genre: string, page: number = 1): Promise<any> {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${URL_REQUEST.GET_SONGS_BY_GENRE}/${genre}?page=${page}`)
+    );
+  }
 }

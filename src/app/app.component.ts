@@ -56,4 +56,5 @@ export class AppComponent implements OnInit, OnDestroy {
     ].includes(this.router.url);
     console.log(this.router.url, this.shouldRenderMenu);
   }
+
 }

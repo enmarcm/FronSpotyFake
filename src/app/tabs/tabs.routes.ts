@@ -11,7 +11,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('../home/home.page').then((m) => m.HomePage),
       },
-
       {
         path: 'home/song/:idSong',
         loadComponent: () =>
@@ -37,6 +36,11 @@ export const routes: Routes = [
         path: 'folder',
         loadComponent: () =>
           import('../tab3/tab3.page').then((m) => m.Tab3Page),
+      },
+      {
+        path: 'search/songGenre/:genre',
+        loadComponent: () =>
+          import('../genre-song/genre-song.page').then((m) => m.GenreSongPage),
       },
       {
         path: '',

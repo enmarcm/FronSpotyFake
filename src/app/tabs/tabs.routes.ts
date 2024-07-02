@@ -33,9 +33,9 @@ export const routes: Routes = [
           import('../search/search.page').then((m) => m.SearchPage),
       },
       {
-        path: 'folder',
+        path: 'playlists',
         loadComponent: () =>
-          import('../tab3/tab3.page').then((m) => m.Tab3Page),
+          import('../playlists/playlists.page').then((m) => m.PlaylistsPage),
       },
       {
         path: 'search/songGenre/:genre',

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { first, firstValueFrom } from 'rxjs';
 import { URL_REQUEST } from 'src/constants';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -62,18 +63,28 @@ export class SongSearchService {
   }
 
   getSongByName(name: string, page: number = 1): Promise<any> {
-    const peticion = `${URL_REQUEST.GET_SONGS_BY_NAME}/${name}?page=${page}`
-    
-    console.log(peticion)
-    
-    const result = firstValueFrom(
-      this.httpClient.get<any>(
-        peticion
-      )
-    );
+    const peticion = `${URL_REQUEST.GET_SONGS_BY_NAME}/${name}?page=${page}`;
+
+    console.log(peticion);
+
+    const result = firstValueFrom(this.httpClient.get<any>(peticion));
 
     console.log(result);
 
     return result;
+  }
+
+  getPlaylists(): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    console.log(myToken);
+
+    const headers = new HttpHeaders({
+      Authorization: `${myToken}`,
+    });
+
+    return firstValueFrom(
+      this.httpClient.get<any>(URL_REQUEST.GET_PLAYLISTS, { headers })
+    );
   }
 }

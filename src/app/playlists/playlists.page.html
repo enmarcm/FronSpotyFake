@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>PLaylists</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="add" color="white"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div class="bg-gradient-to-b from-gray-900 to-black">
+    <ion-grid [fixed]="true" class="min-h-screen">
+      <!-- TITULO -->
+      <ion-row class="min-h-[20%]">
+        <ion-col size="12">
+          <h1 class="text-center text-3xl font-sans text-white font-semibold">
+            Tus playlists
+          </h1>
+        </ion-col>
+      </ion-row>
+
+      <!-- LIKES -> Esto es estatico -->
+      <ion-row class="my-3">
+        <ion-card class="flex w-full py-2 px-4" (click)="goToLikes()">
+          <div class="w-16 flex justify-center items-center">
+            <ion-img
+              alt="Silhouette of mountains"
+              src="https://ionicframework.com/docs/img/demos/card-media.png"
+              class="w-full h-full aspect-1 object-cover rounded-lg"
+            />
+          </div>
+
+          <ion-card-header
+            class="w-full flex justify-start items-start text-start"
+          >
+            <ion-card-title class="text-sm text-start"
+              >Tus likes❤️</ion-card-title
+            >
+          </ion-card-header>
+        </ion-card>
+      </ion-row>
+
+      <!--Playlist, esto si carga dinamicamente -->
+      <ion-list class="h-full w-full">
+        @for(playlist of playlists; track playlist.id){
+        <ion-item-sliding>
+          <ion-item
+            class="my-1 px-1 hover:cursor-pointer hover:opacity-45"
+            (click)="goToPlaylist(playlist.id)"
+          >
+            <ion-avatar slot="start">
+              <ion-img [src]="imageBase" loading="lazy"></ion-img>
+            </ion-avatar>
+
+            <ion-label>
+              <span class="text-start font-bold font-sans"
+                >{{ playlist.name.toUpperCase() }}</span
+              >
+            </ion-label>
+
+            <ion-label class="text-end">
+              <span class="text-end text-gray-600 text-sm font-sans font-light">
+                {{ playlist.idSongs.length > 1 ? playlist.idSongs.length + '
+                canciones' : playlist.idSongs.length + ' canción' }}
+              </span>
+            </ion-label>
+          </ion-item>
+
+          <ion-item-options side="end" class="mx-1">
+
+            <ion-item-option
+              (click)="deletePlaylist(playlist.id)"
+              color="success"
+              class="rounded-lg shadow-lg m-1 w-20"
+            >
+            <span class="text-center font-semibold font-sans text-black">Editar</span>
+            </ion-item-option>
+
+            <ion-item-option
+              (click)="deletePlaylist(playlist.id)"
+              color="light"
+              class="rounded-lg shadow-lg m-1 w-20"
+            >
+            <span class="text-center font-semibold font-sans text-white">Borrar</span>
+            </ion-item-option>
+            
+
+
+
+          </ion-item-options>
+        </ion-item-sliding>
+        }
+      </ion-list>
+    </ion-grid>
+  </div>
+</ion-content>

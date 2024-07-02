@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
   async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
     const toast = await this.toastController.create({
       message: 'Has iniciado sesión!',
-      duration: 1500,
+      duration: 300,
       position: position,
       color: 'success',
       icon: 'checkmark-circle-outline',

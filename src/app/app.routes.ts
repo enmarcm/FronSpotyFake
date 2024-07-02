@@ -47,5 +47,9 @@ export const routes: Routes = [
     path: 'searchSong/:name',
     redirectTo: '/tabs/search/searchSong/:name',
   },
+  {
+    path: 'playlists',
+    redirectTo: "/tabs/playlists"
+  },
   
 ];

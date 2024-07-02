@@ -67,8 +67,9 @@
 
             <ion-label class="text-end">
               <span class="text-end text-gray-600 text-sm font-sans font-light">
-                {{ playlist.idSongs.length > 1 ? playlist.idSongs.length + '
-                canciones' : playlist.idSongs.length + ' canción' }}
+                {{ (playlist.idSongs.length > 1 || playlist.idSongs.length ==
+                0)? playlist.idSongs.length + ' canciones' :
+                playlist.idSongs.length + ' canción' }}
               </span>
             </ion-label>
           </ion-item>
@@ -107,17 +108,48 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
+            <ion-button (click)="cancel()">Cancelar</ion-button>
           </ion-buttons>
           <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+            <ion-button (click)="confirm()" [strong]="true">CREAR</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
 
       <!-- Aqui ira el contenido dentro del modal -->
       <ion-content>
-        <ion-item> </ion-item>
+        <ion-grid class="flex flex-col justify-start gap-8 p-6">
+          <!-- Nombre de la playlist -->
+          <ion-row>
+            <ion-input
+              label="Nombre de la playlist"
+              label-placement="floating"
+              class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
+              placeholder="Éxitos musicales"
+              color="success"
+              [(ngModel)]="newPlaylist.name"
+            ></ion-input>
+          </ion-row>
+
+          <!-- Descripcion de la playlist -->
+          <ion-row>
+            <ion-textarea
+              label="Descripción de la playlist"
+              labelPlacement="floating"
+              counter="true"
+              maxlength="60"
+              color="success"
+              class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
+              [(ngModel)]="newPlaylist.description"
+            ></ion-textarea>
+          </ion-row>
+
+          <ion-row>
+            <ion-button shape="round" color="success" class="mx-auto">
+              <span class="text-white font-bold text-md">Crear Playlist</span>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
       </ion-content>
     </ng-template>
   </ion-modal>

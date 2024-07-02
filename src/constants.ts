@@ -14,4 +14,6 @@ export enum URL_REQUEST{
     GET_SONGS_BY_GENRE = `${BASE_URL}/songs/getByGenre`,
     GET_SONGS_BY_NAME = `${BASE_URL}/songs`,
     GET_PLAYLISTS = `${BASE_URL}/playlist/user`,
+    CRETE_PLAYLIST = `${BASE_URL}/playlist/create`,
+    DELETE_PLAYLIST = `${BASE_URL}/playlist/delete`,
 }

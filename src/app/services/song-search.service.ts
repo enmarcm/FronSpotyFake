@@ -87,4 +87,29 @@ export class SongSearchService {
       this.httpClient.get<any>(URL_REQUEST.GET_PLAYLISTS, { headers })
     );
   }
+
+  newPlaylist(playlist: any): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    console.log(myToken);
+
+    const headers = new HttpHeaders({
+      Authorization: `${myToken}`,
+    });
+
+    return firstValueFrom(
+      this.httpClient.post<any>(URL_REQUEST.CRETE_PLAYLIST, playlist, {
+        headers,
+      })
+    );
+  }
+
+  deletePlaylist(playlistId: string): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({Authorization: `${myToken}`});
+
+    return firstValueFrom(this.httpClient.delete<any>(`${URL_REQUEST.DELETE_PLAYLIST}/${playlistId}`, {headers}));
+    
+  }
 }

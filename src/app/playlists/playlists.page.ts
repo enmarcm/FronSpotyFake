@@ -5,10 +5,8 @@ import { IonicModule, IonModal } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {  addCircleOutline } from 'ionicons/icons';
+import { addCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-
-
 
 @Component({
   selector: 'app-playlists',
@@ -18,8 +16,6 @@ import { addIcons } from 'ionicons';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class PlaylistsPage implements OnInit {
-
-
   public playlists: Array<Playlist> = [];
   public imageBase =
     'https://img.freepik.com/vector-gratis/gradiente-azul-rosa_78370-260.jpg';
@@ -30,8 +26,14 @@ export class PlaylistsPage implements OnInit {
     public toastController: ToastController,
     private router: Router
   ) {
-    addIcons({addCircleOutline})
+    addIcons({ addCircleOutline });
   }
+
+  public newPlaylist = {
+    name: '',
+    description: '',
+    idSongs: [],
+  };
 
   async ngOnInit() {
     try {
@@ -52,23 +54,55 @@ export class PlaylistsPage implements OnInit {
   }
   isModalOpen = false;
 
-
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
 
   cancel() {
-    this.setOpen(false)
+    this.setOpen(false);
   }
 
-  confirm() {
-    //Guardar Datos
-    this.setOpen(false)
+  async confirm() {
+    this.setOpen(false);
+    try {
+      await this.presentLoading();
+      const response = await this.songSearchService.newPlaylist(
+        this.newPlaylist
+      );
+
+      if (response?.error) {
+        throw response.error;
+      }
+
+      this.playlists = await this.songSearchService.getPlaylists();
+      await this.presentToastSuccess();
+    } catch (error) {
+      await this.presentToastError('top', error);
+      console.error(`Ocurrio un error`, error);
+    } finally {
+      await this.dismissLoading();
+    }
   }
 
   deletePlaylist = async (playlistId: string) => {
-    console.log(playlistId)
-  }
+    try {
+      await this.presentLoading();
+
+      const response = await this.songSearchService.deletePlaylist(playlistId);
+
+      if (response?.error) {
+        throw response.error;
+      }
+
+      this.playlists = await this.songSearchService.getPlaylists();
+      await this.presentToastSuccess();
+    } catch (error) {
+      await this.presentToastError('top', error);
+      console.error(`Ocurrio un error`, error);
+    } finally {
+      await this.dismissLoading();
+    }
+  };
 
   goToPlaylist = (playlistId: string) =>
     this.router.navigate(['/playlist', playlistId]);

@@ -19,6 +19,10 @@ export const routes: Routes = [
     loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
   },
   {
+    path: 'auth/register',
+    loadComponent: () => import('./register/register.page').then((m) => m.RegisterPage),
+  },
+  {
     path: 'logout',
     loadComponent: () =>
       import('./logout/logout.page').then((m) => m.LogoutPage),
@@ -50,6 +54,10 @@ export const routes: Routes = [
   {
     path: 'playlists',
     redirectTo: "/tabs/playlists"
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./register/register.page').then( m => m.RegisterPage)
   },
   
 ];

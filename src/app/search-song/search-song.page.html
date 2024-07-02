@@ -8,16 +8,19 @@
 
   <div class="w-full p-4 sticky ">
     <h1 class="font-mono font-semibold text-xl text-center text-white">{{name.toUpperCase()}}</h1>
+    <ion-searchbar [value]="name" [debounce]="400" animated="true" (ionInput)="searchNewSong($event)"></ion-searchbar>
   </div>
 
   <ion-list class="h-full w-full overflow-scroll">
-    <ion-item *ngFor="let song of songs; let index" class="my-1 px-3">
-      <ion-avatar slot="start">
-        <img [src]="song.urlImage" />
-      </ion-avatar>
-      <ion-label>{{ song.name }}</ion-label>
-      <ion-label class="text-end text-gray-600 text-sm">{{ song.artistNames[0] }}</ion-label>
-    </ion-item>
+    @for(song of songs; track song.id){
+      <ion-item class="my-1 px-3 hover:cursor-pointer" (click)="goToSong(song.id || song._id)">
+        <ion-avatar slot="start">
+          <ion-img [src]="song.urlImage" loading="lazy"/>
+        </ion-avatar>
+        <ion-label>{{ song.name }}</ion-label>
+        <ion-label class="text-end text-gray-600 text-sm">{{ song.artistNames[0] }}</ion-label>
+      </ion-item>
+    }
   </ion-list>
   
   

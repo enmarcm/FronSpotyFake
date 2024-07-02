@@ -11,13 +11,15 @@
     </div>
 
     <ion-list class="h-full w-full overflow-scroll">
-      <ion-item *ngFor="let song of songs; let index" class="my-1 px-3">
-        <ion-avatar slot="start">
-          <img [src]="song.urlImage" />
-        </ion-avatar>
-        <ion-label>{{ song.name }}</ion-label>
-        <ion-label class="text-end text-gray-600 text-sm">{{ song.artists[0].name }}</ion-label>
-      </ion-item>
+      @for(song of songs; track song.id){
+        <ion-item  class="my-1 px-3 hover:cursor-pointer opacity-80" (click)="goToSong(song.idSong)">
+          <ion-avatar slot="start">
+            <ion-img [src]="song.urlImage"/>
+          </ion-avatar>
+          <ion-label>{{ song.name }}</ion-label>
+          <ion-label class="text-end text-gray-600 text-sm">{{ song.artists[0].name }}</ion-label>
+        </ion-item>
+      }
     </ion-list>
     
     

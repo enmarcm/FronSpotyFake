@@ -35,6 +35,16 @@ export class SearchSongPage implements OnInit, AfterViewInit {
     this.name = this.activatedRoute.snapshot.paramMap.get('name') || '';
   }
 
+  searchNewSong(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.router.navigate(['/searchSong', query]);
+  }
+
+  goToSong(songId: string) {
+    console.log('songId', songId)
+    this.router.navigate(['/song', songId]);
+  }
+
   ngAfterViewInit(): void {
     this.loader = document.getElementById('loader');
     this.setupIntersectionObserver();
@@ -71,6 +81,8 @@ export class SearchSongPage implements OnInit, AfterViewInit {
     );
     if (response.length > 0) {
       this.songs = [...this.songs, ...response];
+
+      console.log(this.songs)
     } else {
       await this.presentToastError('bottom', 'No more songs to load');
       if (this.observer) this.observer.disconnect();

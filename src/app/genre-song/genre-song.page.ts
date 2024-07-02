@@ -27,15 +27,7 @@ export class GenreSongPage implements OnInit, AfterViewInit {
 
   private loader: any
   public genre: string = '';
-  public songs: [
-    {
-      id: string;
-      name: string;
-      urlImage: string;
-      artists: Array<any>;
-      urlSong: string;
-    }
-  ] = [] as any;
+  public songs: any = []
   private page: number = 1;
 
   ngAfterViewInit(): void {
@@ -129,6 +121,12 @@ export class GenreSongPage implements OnInit, AfterViewInit {
 
     if (!this.loader) return;
     observer.observe(this.loader);
+  }
+
+  goToSong(songId: string){
+    console.log(this.songs)
+    console.log('songId', songId)
+    this.router.navigate(['/song', songId]);
   }
 
 }

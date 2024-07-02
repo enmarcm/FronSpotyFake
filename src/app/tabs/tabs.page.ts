@@ -1,6 +1,6 @@
 import { Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
 import { addIcons } from 'ionicons';
-import { home, search, folder } from 'ionicons/icons';
+import { home, search, barcodeOutline } from 'ionicons/icons';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private router: Router) {
-    addIcons({ home, search, folder });
+    addIcons({ home, search, barcodeOutline });
   }
 
   ngOnInit() {

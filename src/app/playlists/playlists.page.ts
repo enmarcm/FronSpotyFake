@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonModal } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import {  addCircleOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+
+
 
 @Component({
   selector: 'app-playlists',
@@ -14,6 +18,8 @@ import { Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class PlaylistsPage implements OnInit {
+
+
   public playlists: Array<Playlist> = [];
   public imageBase =
     'https://img.freepik.com/vector-gratis/gradiente-azul-rosa_78370-260.jpg';
@@ -23,7 +29,9 @@ export class PlaylistsPage implements OnInit {
     public loadingController: LoadingController,
     public toastController: ToastController,
     private router: Router
-  ) {}
+  ) {
+    addIcons({addCircleOutline})
+  }
 
   async ngOnInit() {
     try {
@@ -41,6 +49,21 @@ export class PlaylistsPage implements OnInit {
     } finally {
       await this.dismissLoading();
     }
+  }
+  isModalOpen = false;
+
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  cancel() {
+    this.setOpen(false)
+  }
+
+  confirm() {
+    //Guardar Datos
+    this.setOpen(false)
   }
 
   deletePlaylist = async (playlistId: string) => {

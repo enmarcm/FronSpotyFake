@@ -5,20 +5,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="success">
-      <ion-icon name="add" color="white"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <div class="bg-gradient-to-b from-gray-900 to-black">
     <ion-grid [fixed]="true" class="min-h-screen">
       <!-- TITULO -->
       <ion-row class="min-h-[20%]">
-        <ion-col size="12">
+        <ion-col size="8" class="flex justify-center items-center">
           <h1 class="text-center text-3xl font-sans text-white font-semibold">
             Tus playlists
           </h1>
+        </ion-col>
+
+        <ion-col size="4" class="flex flex-col justify-center items-center">
+          <ion-button fill="clear" (click)="setOpen(true)">
+            <ion-icon
+              name="add-circle-outline"
+              color="dark"
+              size="large"
+            ></ion-icon>
+          </ion-button>
         </ion-col>
       </ion-row>
 
@@ -70,13 +74,14 @@
           </ion-item>
 
           <ion-item-options side="end" class="mx-1">
-
             <ion-item-option
               (click)="deletePlaylist(playlist.id)"
               color="success"
               class="rounded-lg shadow-lg m-1 w-20"
             >
-            <span class="text-center font-semibold font-sans text-black">Editar</span>
+              <span class="text-center font-semibold font-sans text-black"
+                >Editar</span
+              >
             </ion-item-option>
 
             <ion-item-option
@@ -84,16 +89,36 @@
               color="light"
               class="rounded-lg shadow-lg m-1 w-20"
             >
-            <span class="text-center font-semibold font-sans text-white">Borrar</span>
+              <span class="text-center font-semibold font-sans text-white"
+                >Borrar</span
+              >
             </ion-item-option>
-            
-
-
-
           </ion-item-options>
         </ion-item-sliding>
         }
       </ion-list>
     </ion-grid>
   </div>
+
+  <!--TODO: Cambiar esto al componente -->
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <!-- Cabecera modal -->
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <!-- Aqui ira el contenido dentro del modal -->
+      <ion-content>
+        <ion-item> </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

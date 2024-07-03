@@ -16,5 +16,24 @@ export class LoginService {
       this.httpClient.post(URL_REQUEST.LOGIN, { userName, password })
     );
   }
+
+  sendRegisterRequest(register: RegisterData) {
+    const { userName, password, email, dateOfBirth } = register;
+
+    return firstValueFrom(
+      this.httpClient.post(URL_REQUEST.REGISTER, {
+        userName,
+        password,
+        email,
+        dateOfBirth,
+      })
+    );
+  }
 }
 
+interface RegisterData {
+  userName: string;
+  password: string;
+  email: string;
+  dateOfBirth: string;
+}

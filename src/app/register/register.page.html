@@ -1,13 +1,74 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="bg-gradient-to-b from-gray-900 to-black flex flex-col h-full p-8">
+    <ion-grid class="flex flex-col justify-start gap-8 py-6 min-h-screen">
+      <ion-row>
+        <label class="font-extrabold text-xl">Nombre de usuario</label>
+        <ion-input
+          placeholder="enmarcm"
+          class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
+          color="success"
+          [(ngModel)]="userName"
+          name="userName"
+        ></ion-input>
+      </ion-row>
+
+      <ion-row>
+        <label class="font-extrabold text-xl">Email</label>
+        <ion-input
+          placeholder="theenmanuel123@gmail.com"
+          class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
+          color="success"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+        ></ion-input>
+      </ion-row>
+
+      <ion-row>
+        <label class="font-extrabold text-xl">Contraseña</label>
+        <ion-input
+          type="password"
+          placeholder="NeverGonnaGiveYouUp"
+          class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
+          color="success"
+          [(ngModel)]="password"
+          name="password"
+        >
+          <ion-input-password-toggle
+            slot="end"
+            color="success"
+            class="border-transparent outline-none"
+          ></ion-input-password-toggle>
+        </ion-input>
+      </ion-row>
+
+      <ion-row>
+        <label class="font-extrabold text-xl">Fecha de nacimiento</label>
+
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="datetime"
+              name="dateOfBirth"
+              presentation="date"
+              [(ngModel)]="dateOfBirth"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-row>
+
+      <ion-row>
+        <ion-button
+          shape="round"
+          color="success"
+          class="mx-auto"
+          (click)="register()"
+        >
+          <span class="text-white font-bold text-md">iniciar sesion</span>
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

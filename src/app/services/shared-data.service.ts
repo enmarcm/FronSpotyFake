@@ -15,20 +15,21 @@ interface ArtistInterface {
 export class SharedDataService {
   private urlSongSource = new BehaviorSubject<string>('');
   currentUrlSong = this.urlSongSource.asObservable();
-
+  
   private songNameSource = new BehaviorSubject<string>('');
   currentSongName = this.songNameSource.asObservable();
-
+  
   private trackPhotoSource = new BehaviorSubject<string>('');
   currentTrackPhoto = this.trackPhotoSource.asObservable();
-
+  
   private artistsSource = new BehaviorSubject<ArtistInterface[]>([]);
   currentArtists = this.artistsSource.asObservable();
-
+  
   constructor() { }
-
+  
   changeUrlSong(url: string) {
     this.urlSongSource.next(url);
+    console.log(this.urlSongSource)
   }
 
   changeSongName(name: string) {

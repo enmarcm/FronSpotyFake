@@ -65,13 +65,9 @@ export class SongPage implements OnInit {
       this.date = response.date;
       this.urlImage = response.urlImage;
       this.urlSong = response.url_song;
-      this.sharedDataService.changeUrlSong(this.urlSong);
-      this.sharedDataService.changeArtists(this.artists);
-      this.sharedDataService.changeSongName(this.name);
-      this.sharedDataService.changeTrackPhoto(this.urlImage);
   
       this.duration = Number(response.duration_ms);
-      
+      // console.log(this.duration)
 
       const minutes = Math.floor(this.duration / 60000);
       const seconds = Math.floor((this.duration % 60000) / 1000);
@@ -90,6 +86,13 @@ export class SongPage implements OnInit {
 
   goToArtist(idArtist: string) {
     this.router.navigate([`/artist/${idArtist}`]);
+  }
+
+  updateSharedData() {
+    this.sharedDataService.changeUrlSong(this.urlSong);
+    this.sharedDataService.changeArtists(this.artists);
+    this.sharedDataService.changeSongName(this.name);
+    this.sharedDataService.changeTrackPhoto(this.urlImage);
   }
 
   getGradientStyle(color: string): string {

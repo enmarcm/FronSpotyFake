@@ -99,6 +99,8 @@ export class MusicPlayerComponent implements OnInit {
     }
   }
 
+  
+
   pause() {
     this.musicPlayerService.pause();
   }

@@ -45,5 +45,27 @@ ion-footer {
         justify-content: space-between;
         width: 100px;
       }
+      .progress-container {
+        width: 100%; /* Ensure the container spans the full width */
+        position: absolute; /* Positioning it absolutely to ensure it stays at the bottom */
+        bottom: 0; /* Align to the bottom */
+        left: 0; /* Align to the left */
+      }
+      
+      #audioProgress {
+        width: 100%; /* Full width to span the container */
+        height: 2px; /* Make it really thin */
+        -webkit-appearance: none; /* Necessary for styling */
+        appearance: none;
+      }
+      #audioProgress::-webkit-progress-bar {
+        color: #ccc; /* Background of the progress bar */
+      }
+
+      #audioProgress::-webkit-progress-value {
+        background-color: white; /* Make the advancing part white */
+      }
     }
   }
+
+  /* For WebKit browsers like Chrome and Safari */

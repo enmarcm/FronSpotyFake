@@ -6,13 +6,13 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class MusicPlayerService {
-  private audio = new Audio();
+  public audio = new Audio();
   private isPlaying = false;
   private playStatus = new BehaviorSubject<boolean>(this.isPlaying);
   public playStatus$ = this.playStatus.asObservable();
   private currentTimeSource = new BehaviorSubject<number>(0);
   currentTime$ = this.currentTimeSource.asObservable();
-  private durationSource = new BehaviorSubject<number>(0);
+  public durationSource = new BehaviorSubject<number>(0);
   duration$ = this.durationSource.asObservable();
   private songUrlSource = new BehaviorSubject<string | null>(null);
   public songUrl$ = this.songUrlSource.asObservable();
@@ -44,6 +44,7 @@ export class MusicPlayerService {
       this.audio.load();
       this.audio.onloadedmetadata = () => {
         this.durationSource.next(this.audio.duration);
+        // console.log(this.audio.duration);
         resolve(true);
       };
       this.audio.onerror = reject;
@@ -92,7 +93,4 @@ export class MusicPlayerService {
     }
   }
 
-  changeCurrentTime(time: number) {
-    this.audio.currentTime = time;
-  }
 }

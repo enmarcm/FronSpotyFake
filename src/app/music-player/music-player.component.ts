@@ -50,7 +50,7 @@ export class MusicPlayerComponent implements OnInit {
   public dominantColor: string = '';
   public formattedDuration = '';
   public currentAudioPosition = 0;
-
+  
   constructor(
     private musicPlayerService: MusicPlayerService,
     private sharedDataService: SharedDataService,
@@ -58,18 +58,20 @@ export class MusicPlayerComponent implements OnInit {
   ) {
     addIcons({ play, pause });
   }
-
+  
   isShow() {
     return (
       this.songUrl != null && this.songUrl != '' && this.songUrl != undefined
     );
   }
-
+  
   ngOnInit() {
     this.musicPlayerService.songUrl$.subscribe((url) => {
       if (!url || url === null) return;
-
+      
       this.songUrl = url;
+      const audio = this.musicPlayerService.audio;
+      audio.addEventListener('timeupdate', this.updateProgressBar, false);
     });
     this.musicPlayerService.playStatus$.subscribe((status) => {
       this.isPlaying = status;
@@ -103,7 +105,7 @@ export class MusicPlayerComponent implements OnInit {
 
   changeCurrentTime(event: any) {
     this.currentAudioPosition = event.detail.value;
-    this.musicPlayerService.changeCurrentTime(this.currentAudioPosition);
+    // this.musicPlayerService.changeCurrentTime(this.currentAudioPosition);
   }
   isModalOpen = false;
   async OpenModal(isOpen: boolean) {
@@ -112,6 +114,16 @@ export class MusicPlayerComponent implements OnInit {
 
   async CloseModal() {
     this.OpenModal(false);
+  }
+
+  updateProgressBar = () => {
+    const audio = this.musicPlayerService.audio;
+    // const durationPreview = this.musicPlayerService.audio.duration;
+    const progressBar = document.getElementById('audioProgress') as HTMLProgressElement;
+    if (progressBar && audio) {
+      const percentage = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = percentage;
+    }
   }
 
 }

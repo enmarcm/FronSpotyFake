@@ -7,13 +7,14 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { TypeaheadComponent } from '../typehead/typehead.component';
 
 @Component({
   selector: 'app-playlists',
   templateUrl: './playlists.page.html',
   styleUrls: ['./playlists.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, TypeaheadComponent],
 })
 export class PlaylistsPage implements OnInit {
   public playlists: Array<Playlist> = [];
@@ -64,10 +65,15 @@ export class PlaylistsPage implements OnInit {
 
   async confirm() {
     this.setOpen(false);
+    const newFormatPlaylist = {
+      ...this.newPlaylist,
+      idSongs: this.selectedSongs,
+    };
+
     try {
       await this.presentLoading();
       const response = await this.songSearchService.newPlaylist(
-        this.newPlaylist
+        newFormatPlaylist
       );
 
       if (response?.error) {
@@ -81,6 +87,8 @@ export class PlaylistsPage implements OnInit {
       console.error(`Ocurrio un error`, error);
     } finally {
       await this.dismissLoading();
+      this.selectedSongs = [];
+      this.songs = [];
     }
   }
 
@@ -114,7 +122,7 @@ export class PlaylistsPage implements OnInit {
     error: any
   ) {
     const toast = await this.toastController.create({
-      message: 'Error al cargar las playlists',
+      message: 'Error al cargar las playlists ' + error || 'Error desconocido',
       duration: 1500,
       position: position,
       color: 'danger',
@@ -149,6 +157,63 @@ export class PlaylistsPage implements OnInit {
 
   async dismissLoading() {
     return await this.loadingController.dismiss();
+  }
+
+  // TODO: QUITAR ESTO
+  public isModalOptions = false;
+  public selectedSongsText = '0 Items';
+  public selectedSongs = [];
+  public songs = [] as any;
+  public page = 0;
+  public prevName = '';
+
+  public obtainSongByName = async (name: string) => {
+    try {
+      this.prevName = name;
+      if (this.prevName !== name) {
+        this.page += 1;
+      } else {
+        this.page = 1;
+      }
+      const parsedName = name.trim().replace(/ /g, '%20');
+
+      const response = await this.songSearchService.getSongByName(
+        parsedName,
+        this.page
+      );
+
+      if (response.length > 0) {
+        this.songs = [...this.songs, ...response];
+      } else {
+        await this.presentToastError('top', 'No se encontraron canciones');
+      }
+
+      return this.songs;
+    } catch (error) {
+      await this.presentToastError('top', error);
+      console.error(`Ocurrio un error`, error);
+    }
+  };
+
+  public updateSelectedItems(event: any) {
+    console.log(event);
+    this.selectedSongs = event;
+  }
+
+  private formatData(data: Array<{ id: string; text: string }>) {
+    if (data.length === 1) {
+      return data[0].text;
+    }
+
+    return `${data.length} items`;
+  }
+
+  selectionChange(items: Array<{ id: string; text: string }>) {
+    this.selectedSongs = items as any;
+
+    this.selectedSongsText = this.formatData(items);
+
+    this.isModalOptions = false;
   }
 }
 

@@ -144,8 +144,47 @@
             ></ion-textarea>
           </ion-row>
 
+          <!-- Seleccion de las cancionesp -->
           <ion-row>
-            <ion-button shape="round" color="success" class="mx-auto">
+            <ion-list [inset]="true" class="w-full">
+              <ion-item
+                [button]="true"
+                [detail]="false"
+                id="select-fruits"
+                (click)="isModalOptions = true"
+                class="w-full"
+              >
+                <ion-label>Canciones</ion-label>
+                <div slot="end" id="selected-fruits">
+                  {{ selectedSongsText }}
+                </div>
+              </ion-item>
+            </ion-list>
+
+            <!-- TODO: ESTO TAMBIEN CAMBIAR A COMPONENTE XD -->
+            <ion-modal [isOpen]="isModalOptions" #modal>
+              <ng-template>
+                <app-typehead
+                  class="ion-page"
+                  title="Canciones"
+                  [items]="songs"
+                  [selectedItems]="selectedSongs"
+                  (selectionChange)="selectionChange($event)"
+                  [searchSongs]="obtainSongByName"
+                  (selectionCancel)="modal.dismiss()"
+                  (updatedItems)="updateSelectedItems($event)"
+                ></app-typehead>
+              </ng-template>
+            </ion-modal>
+          </ion-row>
+
+          <ion-row>
+            <ion-button
+              shape="round"
+              color="success"
+              class="mx-auto"
+              (click)="confirm()"
+            >
               <span class="text-white font-bold text-md">Crear Playlist</span>
             </ion-button>
           </ion-row>

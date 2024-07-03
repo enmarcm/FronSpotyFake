@@ -9,7 +9,7 @@
           <ion-icon slot="end" name="musical-note"></ion-icon>
         </ion-range> -->
     <!-- </div> -->
-    <div class="flex items-center justify-between w-full p-2">
+    <div class="flex items-center justify-between w-full p-2" (click)="OpenModal(true)">
       <div class="flex-shrink-0">
         <ion-buttons slot="start">
           <ion-button (click)="togglePlayPause()">
@@ -30,6 +30,31 @@
         </div>
       </div>
     </div>
+
+    <ion-modal [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Modal</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="CloseModal()">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div class="flex flex-col items-center justify-center">
+            <!-- Centered and larger image -->
+            <img [src]="urlImage" class="h-48 w-48 rounded-full mb-4" />
+            <!-- Centered text for song name and artist names -->
+            <div class="text-center">
+              <span class="text-xl font-bold truncate">{{ name }}</span><br>
+              <span class="text-lg truncate">By {{ artists | joinArtists }}</span>
+            </div>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
   </ion-toolbar>
 </ion-footer>
 }@else{

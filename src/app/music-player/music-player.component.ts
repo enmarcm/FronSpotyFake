@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 import { SharedDataService } from '../services/shared-data.service';
 import { FormsModule } from '@angular/forms';
+import { ModalPlayerComponent } from '../modal-player/modal-player.component';
+import {ModalController} from '@ionic/angular';
 
 interface ArtistInterface {
   id: string;
@@ -51,7 +53,8 @@ export class MusicPlayerComponent implements OnInit {
 
   constructor(
     private musicPlayerService: MusicPlayerService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    public modalController: ModalController
   ) {
     addIcons({ play, pause });
   }
@@ -102,4 +105,13 @@ export class MusicPlayerComponent implements OnInit {
     this.currentAudioPosition = event.detail.value;
     this.musicPlayerService.changeCurrentTime(this.currentAudioPosition);
   }
+  isModalOpen = false;
+  async OpenModal(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  async CloseModal() {
+    this.OpenModal(false);
+  }
+
 }

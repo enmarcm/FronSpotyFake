@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { addCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { TypeaheadComponent } from '../typehead/typehead.component';
+import { BASE_IMAGE_DEFAULT } from 'src/constants';
 
 @Component({
   selector: 'app-playlists',
@@ -18,9 +19,8 @@ import { TypeaheadComponent } from '../typehead/typehead.component';
 })
 export class PlaylistsPage implements OnInit {
   public playlists: Array<Playlist> = [];
-  public imageBase =
-    'https://img.freepik.com/vector-gratis/gradiente-azul-rosa_78370-260.jpg';
-
+  public imageBase = BASE_IMAGE_DEFAULT;
+  
   constructor(
     private songSearchService: SongSearchService,
     public loadingController: LoadingController,

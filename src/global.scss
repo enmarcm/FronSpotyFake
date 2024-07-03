@@ -139,3 +139,13 @@ ion-content::webkit-scrollbar {
     transform: translateX(-100%); /* Mueve el texto completamente fuera del contenedor */
   }
 }
+
+
+.custom-gradient2 {
+  background-image: linear-gradient(
+    to bottom, 
+    #0ea5e9 0%, 
+    #f472b6 50%,
+    #000000 60% /* to-black, comienza justo en el 75% */
+  );
+}

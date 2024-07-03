@@ -107,9 +107,24 @@ export class SongSearchService {
   deletePlaylist(playlistId: string): Promise<any> {
     const myToken = localStorage.getItem('token');
 
-    const headers = new HttpHeaders({Authorization: `${myToken}`});
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
 
-    return firstValueFrom(this.httpClient.delete<any>(`${URL_REQUEST.DELETE_PLAYLIST}/${playlistId}`, {headers}));
-    
+    return firstValueFrom(
+      this.httpClient.delete<any>(
+        `${URL_REQUEST.DELETE_PLAYLIST}/${playlistId}`,
+        { headers }
+      )
+    );
   }
-} 
+
+  getPlaylistById(playlistId: string): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+    return firstValueFrom(
+      this.httpClient.get<any>(`${URL_REQUEST.GET_PLAYLIST}/${playlistId}`, {
+        headers,
+      })
+    );
+  }
+}

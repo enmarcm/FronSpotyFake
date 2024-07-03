@@ -67,11 +67,9 @@ export class SongPage implements OnInit {
       this.urlSong = response.url_song;
   
       this.duration = Number(response.duration_ms);
-      // console.log(this.duration)
 
       const minutes = Math.floor(this.duration / 60000);
       const seconds = Math.floor((this.duration % 60000) / 1000);
-      // console.log(seconds);
 
       this.formattedDuration = `${minutes}:${
         seconds < 10 ? '0' : ''

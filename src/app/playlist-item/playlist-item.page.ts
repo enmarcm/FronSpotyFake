@@ -1,0 +1,159 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonIcon,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonImg,
+  IonCard,
+  IonCardTitle,
+  IonCardHeader,
+  IonCardContent,
+  IonItem,
+  IonLabel,
+  IonThumbnail, IonList } from '@ionic/angular/standalone';
+import { SongSearchService } from '../services/song-search.service';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BASE_IMAGE_DEFAULT } from 'src/constants';
+import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
+
+@Component({
+  selector: 'app-playlist-item',
+  templateUrl: './playlist-item.page.html',
+  styleUrls: ['./playlist-item.page.scss'],
+  standalone: true,
+  imports: [IonList, 
+    IonLabel,
+    IonItem,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCard,
+    IonImg,
+    IonCol,
+    IonRow,
+    IonGrid,
+    IonIcon,
+    IonThumbnail,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    PlayButtomComponent,
+  ],
+})
+export class PlaylistItemPage implements OnInit {
+  public songSearchService = inject(SongSearchService);
+  public imageBase = BASE_IMAGE_DEFAULT;
+
+  public PlaylistItem: PlaylistItemInterface = {
+    id: '',
+    name: '',
+    description: '',
+    idSongs: [],
+    idUser: '',
+    songs: [],
+  };
+
+  async ngOnInit() {
+    try {
+      await this.presentLoading();
+      const response = await this.songSearchService.getPlaylistById(
+        this.PlaylistItem.id
+      );
+
+      this.PlaylistItem = response;
+    } catch (error) {
+      this.presentToastSuccess('bottom');
+    } finally {
+      await this.dismissLoading();
+    }
+  }
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public loadingController: LoadingController,
+    public toastController: ToastController,
+    private router: Router
+  ) {
+    this.PlaylistItem.id =
+      this.activatedRoute.snapshot.paramMap.get('idPlaylist') || '';
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      translucent: false,
+      animated: true,
+      spinner: 'bubbles',
+      cssClass: 'custom-loader-songs',
+    });
+
+    return await loading.present();
+  }
+
+  async dismissLoading() {
+    return await this.loadingController.dismiss();
+  }
+
+  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+    const toast = await this.toastController.create({
+      message: `Se obtuvo la playlist ${this.PlaylistItem.name}!`,
+      duration: 500,
+      position: position,
+      color: 'success',
+      icon: 'checkmark-circle-outline',
+    });
+
+    await toast.present();
+  }
+
+  async presentToastError(
+    position: 'top' | 'middle' | 'bottom' = 'bottom',
+    error: any
+  ) {
+    const toast = await this.toastController.create({
+      message: 'Error al cargar la canción',
+      duration: 1500,
+      position: position,
+      color: 'danger',
+      icon: 'close-circle-outline',
+    });
+
+    await toast.present();
+  }
+
+  goToSong(idSong: string) {
+    this.router.navigate([`/song`, idSong]);
+  }
+}
+
+interface PlaylistItemInterface {
+  id: string;
+  name: string;
+  description: string;
+  idSongs: Array<string>;
+  idUser: string;
+  songs: Array<SongInterface>;
+}
+
+interface SongInterface {
+  idArtist: Array<string>;
+  artistNames: Array<string>;
+  name: string;
+  duration: number;
+  date: string;
+  urlImage: string;
+  urlSong: string;
+  genres: Array<string>;
+  albumName: string;
+  id: string;
+}

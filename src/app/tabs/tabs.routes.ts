@@ -45,7 +45,16 @@ export const routes: Routes = [
       {
         path: 'search/searchSong/:name',
         loadComponent: () =>
-          import('../search-song/search-song.page').then((m) => m.SearchSongPage),
+          import('../search-song/search-song.page').then(
+            (m) => m.SearchSongPage
+          ),
+      },
+      {
+        path: 'playlists/playlist/:idPlaylist',
+        loadComponent: () =>
+          import('../playlist-item/playlist-item.page').then(
+            (m) => m.PlaylistItemPage
+          ),
       },
       {
         path: '',

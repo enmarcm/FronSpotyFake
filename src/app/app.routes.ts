@@ -59,5 +59,9 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./register/register.page').then( m => m.RegisterPage)
   },
+  {
+    path: 'playlist/:idPlaylist',
+    redirectTo: '/tabs/playlists/playlist/:idPlaylist'
+  },
   
 ];

@@ -121,24 +121,26 @@ export class MusicPlayerComponent implements OnInit {
 
   updateProgressBar = () => {
     const audio = this.musicPlayerService.audio;
-    // const durationPreview = this.musicPlayerService.audio.duration;
     const progressBar = document.getElementById('audioProgress') as HTMLProgressElement;
-    if (progressBar && audio) {
+    if (progressBar && audio && isFinite(audio.currentTime) && isFinite(audio.duration) && audio.duration > 0) {
       const percentage = (audio.currentTime / audio.duration) * 100;
       progressBar.value = percentage;
+    } else if (progressBar) {
+      progressBar.value = 0; // Set to 0 or a sensible default if conditions are not met
+    }
+  }
+  
+  updateProgressBarModal = () => {
+    const audio = this.musicPlayerService.audio;
+    const progressBar = document.getElementById('audioProgressModal') as HTMLProgressElement;
+    if (progressBar && audio && isFinite(audio.currentTime) && isFinite(audio.duration) && audio.duration > 0) {
+      const percentage = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = percentage;
+    } else if (progressBar) {
+      progressBar.value = 0; // Set to 0 or a sensible default if conditions are not met
     }
   }
 
-  updateProgressBarModal = () => {
-    const audio = this.musicPlayerService.audio;
-    // const durationPreview = this.musicPlayerService.audio.duration;
-    const progressBar = document.getElementById('audioProgressModal') as HTMLProgressElement;
-    if (progressBar && audio) {
-      const percentage = (audio.currentTime / audio.duration) * 100;
-      progressBar.value = percentage;
-    }
-  
-  }
 
   nextSong() {
     // Increment the song index or loop back to the start

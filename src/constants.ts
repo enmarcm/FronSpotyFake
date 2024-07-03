@@ -17,6 +17,7 @@ export enum URL_REQUEST{
     CRETE_PLAYLIST = `${BASE_URL}/playlist/create`,
     DELETE_PLAYLIST = `${BASE_URL}/playlist/delete`,
     GET_PLAYLIST = `${BASE_URL}/playlist/getById`,
+    REGISTER = `${BASE_URL}/auth/register`
 }
 
 export const BASE_IMAGE_DEFAULT = "https://img.freepik.com/vector-gratis/gradiente-azul-rosa_78370-260.jpg"

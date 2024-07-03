@@ -20,7 +20,7 @@ import { BASE_IMAGE_DEFAULT } from 'src/constants';
 export class PlaylistsPage implements OnInit {
   public playlists: Array<Playlist> = [];
   public imageBase = BASE_IMAGE_DEFAULT;
-  
+
   constructor(
     private songSearchService: SongSearchService,
     public loadingController: LoadingController,
@@ -116,6 +116,8 @@ export class PlaylistsPage implements OnInit {
     this.router.navigate(['/playlist', playlistId]);
 
   goToLikes = () => this.router.navigate(['/likes']);
+
+  
 
   async presentToastError(
     position: 'top' | 'middle' | 'bottom' = 'bottom',
@@ -222,4 +224,7 @@ interface Playlist {
   name: string;
   id: string;
   _id: string;
+  description: string;
+  image: string;
+  songs: Array<any>;
 }

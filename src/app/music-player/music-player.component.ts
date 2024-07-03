@@ -72,6 +72,7 @@ export class MusicPlayerComponent implements OnInit {
       this.songUrl = url;
       const audio = this.musicPlayerService.audio;
       audio.addEventListener('timeupdate', this.updateProgressBar, false);
+      audio.addEventListener('timeupdate', this.updateProgressBarModal, false);
     });
     this.musicPlayerService.playStatus$.subscribe((status) => {
       this.isPlaying = status;
@@ -126,6 +127,27 @@ export class MusicPlayerComponent implements OnInit {
       const percentage = (audio.currentTime / audio.duration) * 100;
       progressBar.value = percentage;
     }
+  }
+
+  updateProgressBarModal = () => {
+    const audio = this.musicPlayerService.audio;
+    // const durationPreview = this.musicPlayerService.audio.duration;
+    const progressBar = document.getElementById('audioProgressModal') as HTMLProgressElement;
+    if (progressBar && audio) {
+      const percentage = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = percentage;
+    }
+  
+  }
+
+  nextSong() {
+    // Increment the song index or loop back to the start
+
+  }
+  
+  previousSong() {
+    // Decrement the song index or loop to the end
+
   }
 
 }

@@ -68,4 +68,20 @@ ion-footer {
     }
   }
 
+  ion-modal {
+    #audioProgressModal {
+      width: 100%; /* Full width to span the container */
+      height: 2px; /* Make it really thin */
+      -webkit-appearance: none; /* Necessary for styling */
+      appearance: none;
+    }
+    #audioProgressModal::-webkit-progress-bar {
+      color: #ccc; /* Background of the progress bar */
+    }
+
+    #audioProgressModal::-webkit-progress-value {
+      background-color: white; /* Make the advancing part white */
+    }
+  }
+
   /* For WebKit browsers like Chrome and Safari */

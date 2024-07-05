@@ -13,63 +13,111 @@ export class SongSearchService {
   constructor() {}
 
   getSong(idSong: string): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
     return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_SONG}/${idSong}`)
+      this.httpClient.get<any>(`${URL_REQUEST.GET_SONG}/${idSong}`, { headers })
     );
   }
 
   getTopSongs(): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.TOP_SONGS));
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+    return firstValueFrom(
+      this.httpClient.get<any>(URL_REQUEST.TOP_SONGS, { headers })
+    );
   }
 
   getArtistInfo(idArtist: string): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
     return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST}/${idArtist}`)
+      this.httpClient.get<any>(`${URL_REQUEST.GET_ARTIST}/${idArtist}`, {
+        headers,
+      })
     );
   }
 
   getArtistAlbums(idArtist: string): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
     return firstValueFrom(
       this.httpClient.get<any>(
-        `${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}?limit=6`
+        `${URL_REQUEST.GET_ARTIST_ALBUMS}/${idArtist}?limit=6`,
+        { headers }
       )
     );
   }
 
   getTopArtist(): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.GET_ARTISTS));
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
+    return firstValueFrom(
+      this.httpClient.get<any>(URL_REQUEST.GET_ARTISTS, { headers })
+    );
   }
 
   getNewAlbums(): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.NEW_ALBUMS));
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
+    return firstValueFrom(
+      this.httpClient.get<any>(URL_REQUEST.NEW_ALBUMS, { headers })
+    );
   }
 
   getAlbumInfo(idAlbum: string): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
     return firstValueFrom(
-      this.httpClient.get<any>(`${URL_REQUEST.GET_ALBUM}/${idAlbum}`)
+      this.httpClient.get<any>(`${URL_REQUEST.GET_ALBUM}/${idAlbum}`, {
+        headers,
+      })
     );
   }
 
   getGenres(): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(URL_REQUEST.GET_GENRES));
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+    return firstValueFrom(
+      this.httpClient.get<any>(URL_REQUEST.GET_GENRES, { headers })
+    );
   }
 
   getSongsByGenre(genre: string, page: number = 1): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
     return firstValueFrom(
       this.httpClient.get<any>(
-        `${URL_REQUEST.GET_SONGS_BY_GENRE}/${genre}?page=${page}`
+        `${URL_REQUEST.GET_SONGS_BY_GENRE}/${genre}?page=${page}`,
+        { headers }
       )
     );
   }
 
   getSongByName(name: string, page: number = 1): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
     const peticion = `${URL_REQUEST.GET_SONGS_BY_NAME}/${name}?page=${page}`;
 
-    console.log(peticion);
-
-    const result = firstValueFrom(this.httpClient.get<any>(peticion));
-
-    console.log(result);
+    const result = firstValueFrom(
+      this.httpClient.get<any>(peticion, { headers })
+    );
 
     return result;
   }
@@ -125,6 +173,16 @@ export class SongSearchService {
       this.httpClient.get<any>(`${URL_REQUEST.GET_PLAYLIST}/${playlistId}`, {
         headers,
       })
+    );
+  }
+
+  uploadSong(song: any): Promise<any> {
+    const myToken = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({ Authorization: `${myToken}` });
+
+    return firstValueFrom(
+      this.httpClient.post<any>(URL_REQUEST.UPLOAD_SONG, song, { headers })
     );
   }
 }

@@ -21,6 +21,7 @@ export enum URL_REQUEST{
     OBTAIN_DATA_USER = `${BASE_URL}/profile/info`,
     UPDATE_DATA_USER = `${BASE_URL}/profile/update`,
     DELETE_USER = `${BASE_URL}/profile/delete`,
+    UPLOAD_SONG = `${BASE_URL}/songs/add`,
 }
 
 export const BASE_IMAGE_DEFAULT = "https://img.freepik.com/vector-gratis/gradiente-azul-rosa_78370-260.jpg"

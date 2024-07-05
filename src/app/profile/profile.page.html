@@ -1,6 +1,8 @@
 <ion-content [fullscreen]="true">
   <div class="bg-gradient-to-b from-gray-900 to-black flex flex-col h-full p-8">
-    <ion-grid class="flex flex-col justify-start gap-8 py-6 min-h-screen">
+    <ion-grid
+      class="flex flex-col justify-start gap-8 py-6 min-h-[1400px] overflow-y-auto"
+    >
       <ion-row>
         <ion-col class="w-full justify-center flex items-center mt-4" size="12">
           <h1 class="text-white text-2xl font-semibold">Perfil del usuario</h1>
@@ -72,6 +74,19 @@
         </ion-col>
       </ion-row>
 
+      @if(renderingArtist){
+      <ion-row>
+        <ion-button
+          shape="round"
+          color="success"
+          class="mx-auto w-full hover:cursor-pointer hover:opacity-85"
+          [routerLink]="['/upload']"
+        >
+          <span class="text-white font-bold text-md">Subir canción</span>
+        </ion-button>
+      </ion-row>
+      }
+
       <ion-row>
         <ion-button
           shape="round"
@@ -79,7 +94,9 @@
           class="mx-auto w-full"
           (click)="handleCLickUpdate()"
         >
-          <span class="text-white font-bold text-md">Actualizar información</span>
+          <span class="text-white font-bold text-md"
+            >Actualizar información</span
+          >
         </ion-button>
       </ion-row>
 
@@ -93,21 +110,6 @@
           <span class="text-white font-bold text-md">Eliminar cuenta</span>
         </ion-button>
       </ion-row>
-
-      @if(renderingArtist){
-        <ion-row>
-          <ion-button
-            shape="round"
-            color="success"
-            class="mx-auto w-full"
-            [routerLink]="['/upload']"
-          >
-            <span class="text-white font-bold text-md">Subir canción</span>
-          </ion-button>
-        </ion-row>
-      }
-
-
     </ion-grid>
   </div>
 </ion-content>

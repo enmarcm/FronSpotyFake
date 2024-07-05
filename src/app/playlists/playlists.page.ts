@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SongSearchService } from '../services/song-search.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+// import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -72,8 +72,8 @@ export class PlaylistsPage implements OnInit {
 
   constructor(
     private songSearchService: SongSearchService,
-    public loadingController: LoadingController,
-    public toastController: ToastController,
+    // public loadingController: LoadingController,
+    // public toastController: ToastController,
     private router: Router
   ) {
     addIcons({ addCircleOutline });
@@ -87,19 +87,19 @@ export class PlaylistsPage implements OnInit {
 
   async ngOnInit() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
 
       const response = await this.songSearchService.getPlaylists();
 
       this.playlists = response;
 
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
     } catch (error) {
-      await this.presentToastError('top', error);
+      // await this.presentToastError('top', error);
       console.error(`Ocurrio un error`, error);
       this.router.navigate(['/tabs']);
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   }
   isModalOpen = false;
@@ -120,7 +120,7 @@ export class PlaylistsPage implements OnInit {
     };
 
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       const response = await this.songSearchService.newPlaylist(
         newFormatPlaylist
       );
@@ -130,12 +130,12 @@ export class PlaylistsPage implements OnInit {
       }
 
       this.playlists = await this.songSearchService.getPlaylists();
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
     } catch (error) {
-      await this.presentToastError('top', error);
+      // await this.presentToastError('top', error);
       console.error(`Ocurrio un error`, error);
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
       this.selectedSongs = [];
       this.songs = [];
     }
@@ -143,7 +143,7 @@ export class PlaylistsPage implements OnInit {
 
   deletePlaylist = async (playlistId: string) => {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
 
       const response = await this.songSearchService.deletePlaylist(playlistId);
 
@@ -152,12 +152,12 @@ export class PlaylistsPage implements OnInit {
       }
 
       this.playlists = await this.songSearchService.getPlaylists();
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
     } catch (error) {
-      await this.presentToastError('top', error);
+      // await this.presentToastError('top', error);
       console.error(`Ocurrio un error`, error);
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   };
 
@@ -166,45 +166,45 @@ export class PlaylistsPage implements OnInit {
 
   goToLikes = () => this.router.navigate(['/likes']);
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: 'Error al cargar las playlists ' + error || 'Error desconocido',
-      duration: 1500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: 'Error al cargar las playlists ' + error || 'Error desconocido',
+  //     duration: 1500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: `Se obtuvieron las playlists!`,
-      duration: 500,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: `Se obtuvieron las playlists!`,
+  //     duration: 500,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'bubbles',
-      cssClass: 'custom-loader-songs',
-    });
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     translucent: false,
+  //     animated: true,
+  //     spinner: 'bubbles',
+  //     cssClass: 'custom-loader-songs',
+  //   });
 
-    return await loading.present();
-  }
+  //   return await loading.present();
+  // }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+  //   return await this.loadingController.dismiss();
+  // }
 
   // TODO: QUITAR ESTO
   public isModalOptions = false;
@@ -232,12 +232,12 @@ export class PlaylistsPage implements OnInit {
       if (response.length > 0) {
         this.songs = [...this.songs, ...response];
       } else {
-        await this.presentToastError('top', 'No se encontraron canciones');
+        // await this.presentToastError('top', 'No se encontraron canciones');
       }
 
       return this.songs;
     } catch (error) {
-      await this.presentToastError('top', error);
+      // await this.presentToastError('top', error);
       console.error(`Ocurrio un error`, error);
     }
   };

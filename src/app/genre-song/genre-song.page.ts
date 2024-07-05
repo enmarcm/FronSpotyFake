@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoadingController, ToastController } from '@ionic/angular';
+// import { LoadingController, ToastController } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonList, IonContent, IonItem, IonAvatar, IonImg, IonLabel, IonInfiniteScroll } from "@ionic/angular/standalone";
@@ -17,8 +17,8 @@ export class GenreSongPage implements OnInit, AfterViewInit {
   songSearchService = inject(SongSearchService);
 
   constructor(
-    public loadingController: LoadingController,
-    public toastController: ToastController,
+    // public loadingController: LoadingController,
+    // public toastController: ToastController,
     public router: Router,
     public activatedRoute: ActivatedRoute
   ) {
@@ -36,58 +36,58 @@ export class GenreSongPage implements OnInit, AfterViewInit {
 
   async ngOnInit() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       await this.obtainNewSongs();
       await this.setupIntersectionObserver();
-      await this.presentToastSuccess('bottom');
+      // await this.presentToastSuccess('bottom');
 
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       this.router.navigate(['/search']);
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: `Cargaron las canciones`,
-      duration: 500,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: `Cargaron las canciones`,
+  //     duration: 500,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: `Error al cargar las canciones: ${error}`,
-      duration: 500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: `Error al cargar las canciones: ${error}`,
+  //     duration: 500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'bubbles',
-      cssClass: 'custom-loader-songs',
-    });
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     translucent: false,
+  //     animated: true,
+  //     spinner: 'bubbles',
+  //     cssClass: 'custom-loader-songs',
+  //   });
 
-    return await loading.present();
-  }
+  //   return await loading.present();
+  // }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+  //   return await this.loadingController.dismiss();
+  // }
 
   async obtainNewSongs() {
     try {
@@ -100,7 +100,7 @@ export class GenreSongPage implements OnInit, AfterViewInit {
       this.songs = [...this.songs, ...response] as any;
 
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
     }
   }
 

@@ -18,7 +18,7 @@ import {
 } from '@ionic/angular/standalone';
 import { LoginService } from '../services/login.service';
 import { Router, RouterLink } from '@angular/router';
-import { ToastController, LoadingController } from '@ionic/angular';
+// import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -55,14 +55,14 @@ export class ProfilePage implements OnInit {
   public renderingArtist = false
 
   constructor(
-    public loadingController: LoadingController,
+    // public loadingController: LoadingController,
     public router: Router,
-    public toastController: ToastController
+    // public toastController: ToastController
   ) {}
 
   async ngOnInit() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       const data = (await this.loginService.obtainDataUser()) as any;
 
       const formattedDateOfBirth = data.dateOfBirth.split('T')[0];
@@ -79,12 +79,12 @@ export class ProfilePage implements OnInit {
       }
 
       console.log(this.renderingArtist)
-      await this.presentToastSuccess('bottom');
+      // await this.presentToastSuccess('bottom');
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       console.error(error);
     } finally {
-      this.loadingController.dismiss();
+      // this.loadingController.dismiss();
     }
   }
 
@@ -104,66 +104,66 @@ export class ProfilePage implements OnInit {
 
   async handleCLickUpdate() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       await this.updateDataUser();
-      await this.presentToastSuccess('bottom');
+      // await this.presentToastSuccess('bottom');
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       console.error(error);
     } finally {
-      this.loadingController.dismiss();
+      // this.loadingController.dismiss();
     }
   }
 
   async deleteAccount() {
     const mensajeInfo = 'Cuenta eliminada correctamente';
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       await this.loginService.deleteAccount();
-      await this.presentToastSuccess('bottom', mensajeInfo);
+      // await this.presentToastSuccess('bottom', mensajeInfo);
       this.router.navigate(['/main']);
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       console.error(error);
     } finally {
-      this.loadingController.dismiss();
+      // this.loadingController.dismiss();
     }
   }
 
   // Metodos diferidos
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      translucent: true,
-    });
-    return await loading.present();
-  }
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     cssClass: 'my-custom-class',
+  //     translucent: true,
+  //   });
+  //   return await loading.present();
+  // }
 
-  async presentToastSuccess(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    message: string = 'Datos actualizados correctamente'
-  ) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 1000,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   message: string = 'Datos actualizados correctamente'
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message,
+  //     duration: 1000,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: error ? error : 'Ocurrio un error',
-      duration: 1000,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: error ? error : 'Ocurrio un error',
+  //     duration: 1000,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 }

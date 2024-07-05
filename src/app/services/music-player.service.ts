@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LoadingController } from '@ionic/angular';
+// import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,9 @@ export class MusicPlayerService {
   private songUrlSource = new BehaviorSubject<string | null>(null);
   public songUrl$ = this.songUrlSource.asObservable();
 
-  constructor(private loadingController: LoadingController) {}
+  constructor(
+    // private loadingController: LoadingController
+  ) {}
 
   async play(url: string) {
     this.songUrlSource.next(url);
@@ -28,14 +30,14 @@ export class MusicPlayerService {
     }
   
     this.audio.src = url;
-    await this.presentLoading();
+    // await this.presentLoading();
     try {
       await this.loadAudio(); 
-      await this.dismissLoading();
+      // await this.dismissLoading();
       await this.startPlayback(); // Inicia la reproducción
     } catch (error) {
       console.error("Error during audio playback:", error);
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   }
 
@@ -70,20 +72,20 @@ export class MusicPlayerService {
     this.playStatus.next(this.isPlaying);
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'lines-sharp',
-      cssClass: 'custom-loader-songs',
-    });
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     translucent: false,
+  //     animated: true,
+  //     spinner: 'lines-sharp',
+  //     cssClass: 'custom-loader-songs',
+  //   });
 
-    return await loading.present();
-  }
+  //   return await loading.present();
+  // }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+  //   return await this.loadingController.dismiss();
+  // }
 
   resume() {
     if (!this.isPlaying && this.audio.src) {

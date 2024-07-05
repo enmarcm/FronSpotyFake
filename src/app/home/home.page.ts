@@ -7,7 +7,7 @@ import { ItemCardComponent } from '../item-card/item-card.component';
 import { ItemArtistComponent } from '../item-artist/item-artist.component';
 import albumMocks from '../../mocks/album.json';
 import { SongSearchService } from '../services/song-search.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+// import { LoadingController, ToastController } from '@ionic/angular';
 import { IonHeader, IonToolbar, IonContent, IonGrid, IonCol, IonRow, IonText, IonTitle } from "@ionic/angular/standalone";
 
 @Component({
@@ -27,8 +27,8 @@ export class HomePage implements OnInit {
   songSearchService = inject(SongSearchService);
 
   constructor(
-    public loadingController: LoadingController,
-    public toastController: ToastController
+    // public loadingController: LoadingController,
+    // public toastController: ToastController
   ) {}
 
   public songs: any[] = songsMocks;
@@ -37,7 +37,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       const responseSongs = await this.songSearchService.getTopSongs();
       const responseArtists = await this.songSearchService.getTopArtist();
       const responseAlbums = await this.songSearchService.getNewAlbums();
@@ -45,51 +45,51 @@ export class HomePage implements OnInit {
       this.songs = responseSongs;
       this.artists = responseArtists;
       this.albums = responseAlbums;
-      await this.presentToastSuccess('bottom');
+      // await this.presentToastSuccess('bottom');
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'bubbles',
-      cssClass: 'custom-loader-songs',
-    });
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     translucent: false,
+  //     animated: true,
+  //     spinner: 'bubbles',
+  //     cssClass: 'custom-loader-songs',
+  //   });
 
-    return await loading.present();
-  }
+  //   return await loading.present();
+  // }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+  //   return await this.loadingController.dismiss();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: 'Error al cargar las ultimas canciones',
-      duration: 1500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: 'Error al cargar las ultimas canciones',
+  //     duration: 1500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: `Ha cargado con éxito!`,
-      duration: 1500,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: `Ha cargado con éxito!`,
+  //     duration: 1500,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 }

@@ -19,7 +19,7 @@ import {
   IonLabel,
   IonThumbnail, IonList } from '@ionic/angular/standalone';
 import { SongSearchService } from '../services/song-search.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+// import { LoadingController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BASE_IMAGE_DEFAULT } from 'src/constants';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
@@ -66,68 +66,68 @@ export class PlaylistItemPage implements OnInit {
 
   async ngOnInit() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       const response = await this.songSearchService.getPlaylistById(
         this.PlaylistItem.id
       );
 
       this.PlaylistItem = response;
     } catch (error) {
-      this.presentToastSuccess('bottom');
+      // this.presentToastSuccess('bottom');
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   }
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public loadingController: LoadingController,
-    public toastController: ToastController,
+    // public loadingController: LoadingController,
+    // public toastController: ToastController,
     private router: Router
   ) {
     this.PlaylistItem.id =
       this.activatedRoute.snapshot.paramMap.get('idPlaylist') || '';
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'bubbles',
-      cssClass: 'custom-loader-songs',
-    });
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     translucent: false,
+  //     animated: true,
+  //     spinner: 'bubbles',
+  //     cssClass: 'custom-loader-songs',
+  //   });
 
-    return await loading.present();
-  }
+  //   return await loading.present();
+  // }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+  //   return await this.loadingController.dismiss();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: `Se obtuvo la playlist ${this.PlaylistItem.name}!`,
-      duration: 500,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: `Se obtuvo la playlist ${this.PlaylistItem.name}!`,
+  //     duration: 500,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: 'Error al cargar la canción',
-      duration: 1500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: 'Error al cargar la canción',
+  //     duration: 1500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
   goToSong(idSong: string) {
     this.router.navigate([`/song`, idSong]);

@@ -18,7 +18,7 @@ import {
   IonCol,
 } from '@ionic/angular/standalone';
 import { UploadService } from '../upload.service';
-import { ToastController, LoadingController } from '@ionic/angular';
+// import { ToastController, LoadingController } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { Router } from '@angular/router';
 
@@ -61,8 +61,8 @@ export class UploadPage implements OnInit {
 
   constructor(
     public uploadService: UploadService,
-    public loadingController: LoadingController,
-    public toastController: ToastController,
+    // public loadingController: LoadingController,
+    // public toastController: ToastController,
     public searchSongService: SongSearchService,
     public router: Router
   ) {}
@@ -91,7 +91,7 @@ export class UploadPage implements OnInit {
 
   async uploadFileImage(): Promise<void> {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       if (this.selectedFileImage) {
         try {
           const url = await this.uploadService
@@ -104,12 +104,12 @@ export class UploadPage implements OnInit {
           console.error('Error uploading file:', error);
         }
       }
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
     } catch (error) {
       console.error('Error uploading file:', error);
-      await this.presentToastError('bottom', 'Error al subir la imagen');
+      // await this.presentToastError('bottom', 'Error al subir la imagen');
     } finally {
-      await this.loadingController.dismiss();
+      // await this.loadingController.dismiss();
     }
   }
 
@@ -117,19 +117,19 @@ export class UploadPage implements OnInit {
     if (this.selectedFileSong) {
       console.log('Cargando archivo de canción...');
       try {
-        await this.presentLoading();
+        // await this.presentLoading();
         const url = await this.uploadService
           .uploadFile(this.selectedFileSong)
           .toPromise();
         console.log('File uploaded! URL:', url);
         if (!url) throw new Error('Error uploading file');
         this.urlSong = url;
-        await this.presentToastSuccess();
+        // await this.presentToastSuccess();
       } catch (error) {
         console.error('Error uploading file:', error);
-        await this.presentToastError('bottom', 'Error al subir la canción');
+        // await this.presentToastError('bottom', 'Error al subir la canción');
       } finally {
-        await this.loadingController.dismiss();
+        // await this.loadingController.dismiss();
       }
     }
   }
@@ -154,7 +154,7 @@ export class UploadPage implements OnInit {
 
   async uploadSong() {
     if (!this.songName || !this.albumName || !this.urlSong) {
-      await this.presentToastError('top', 'Faltan datos por completar');
+      // await this.presentToastError('top', 'Faltan datos por completar');
     }
 
     try {
@@ -167,51 +167,51 @@ export class UploadPage implements OnInit {
         date: new Date().toISOString().split('T')[0],
       };
 
-      await this.presentLoading();
+      // await this.presentLoading();
       const result = await this.searchSongService.uploadSong(song);
 
       if(result?.error) throw new Error(result.error);
 
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
       this.router.navigate(['/tabs/home']);
     } catch (error) {
       console.error(error);
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
     } finally {
-      await this.loadingController.dismiss();
+      // await this.loadingController.dismiss();
     }
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      translucent: true,
-    });
-    return await loading.present();
-  }
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     cssClass: 'my-custom-class',
+  //     translucent: true,
+  //   });
+  //   return await loading.present();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Cargó con éxito!',
-      duration: 1000,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: 'Cargó con éxito!',
+  //     duration: 1000,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: error ? error : 'Error',
-      duration: 1000,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: error ? error : 'Error',
+  //     duration: 1000,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 }

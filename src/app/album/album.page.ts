@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+// import { LoadingController, ToastController } from '@ionic/angular';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 import { SongSearchService } from '../services/song-search.service';
 import getDominantColorHex from 'src/utils/getColorFromUrl';
@@ -29,8 +29,8 @@ export class AlbumPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private loadingController: LoadingController,
-    public toastController: ToastController,
+    // private loadingController: LoadingController,
+    // public toastController: ToastController,
     private router: Router
   ) {
     this.idAlbum = this.activatedRoute.snapshot.paramMap.get('idAlbum') || '';
@@ -38,7 +38,7 @@ export class AlbumPage implements OnInit {
 
   async ngOnInit() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       const response = await this.songSearchService.getAlbumInfo(this.idAlbum);
 
       this.dominantColor = await getDominantColorHex(response.urlImage);
@@ -49,54 +49,54 @@ export class AlbumPage implements OnInit {
       this.totalTracks = response.total_tracks;
       this.artists = response.artists;
       this.songs = response.songs;
-      await this.presentToastSuccess('bottom');
+      // await this.presentToastSuccess('bottom');
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       this.router.navigate(['/home']);
     } finally {
-      await this.dismissLoading();
+      // await this.dismissLoading();
     }
   }
 
   async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'bubbles',
-      cssClass: 'custom-loader-songs',
-    });
+    // const loading = await this.loadingController.create({
+      // translucent: false,
+      // animated: true,
+      // spinner: 'bubbles',
+      // cssClass: 'custom-loader-songs',
+    // });
 
-    return await loading.present();
+    // return await loading.present();
   }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+    // return await this.loadingController.dismiss();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: `Se obtuvo el artista ${this.name}!`,
-      duration: 1500,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+    // const toast = await this.toastController.create({
+      // message: `Se obtuvo el artista ${this.name}!`,
+      // duration: 1500,
+      // position: position,
+      // color: 'success',
+    // });
 
-    await toast.present();
-  }
+    // await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: 'Error al cargar el artista',
-      duration: 1500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: 'Error al cargar el artista',
+  //     duration: 1500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
   getGradientStyle(color: string): string {
     return `linear-gradient(to bottom, ${color} -40%, black 40%)`;

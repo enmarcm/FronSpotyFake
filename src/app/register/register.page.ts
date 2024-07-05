@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { LoginService } from '../services/login.service';
-import { ToastController, LoadingController } from '@ionic/angular';
+// import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import {
   IonContent,
@@ -50,9 +50,9 @@ export class RegisterPage implements OnInit {
   }
 
   constructor(
-    public loadingController: LoadingController,
+    // public loadingController: LoadingController,
     public router: Router,
-    public toastController: ToastController
+    // public toastController: ToastController
   ) {}
 
   register = async () => {
@@ -64,11 +64,11 @@ export class RegisterPage implements OnInit {
         this.email === '' ||
         this.userName === ''
       ) {
-        await this.presentToastError('top', 'Todos los campos son requeridos');
+        // await this.presentToastError('top', 'Todos los campos son requeridos');
         return;
       }
 
-      await this.presentLoading();
+      // await this.presentLoading();
       const parsedData = {
         userName: this.userName,
         email: this.email,
@@ -86,46 +86,46 @@ export class RegisterPage implements OnInit {
         throw new Error(`Ocurrio un error al registrarse. ${result?.error}`);
       }
 
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
     } catch (error: any) {
-      await this.presentToastError('bottom', error.error.error);
+      // await this.presentToastError('bottom', error.error.error);
       console.error(`Error al registrarse ${error.error.error}`);
     } finally {
-      await this.loadingController.dismiss();
+      // await this.loadingController.dismiss();
     }
   };
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Registrando usuario...',
-      translucent: true,
-    });
-    return await loading.present();
-  }
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     cssClass: 'my-custom-class',
+  //     message: 'Registrando usuario...',
+  //     translucent: true,
+  //   });
+  //   return await loading.present();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Vaya a su correo para activar!',
-      duration: 1000,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: 'Vaya a su correo para activar!',
+  //     duration: 1000,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: error ? error : 'Error al registar',
-      duration: 1000,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: error ? error : 'Error al registar',
+  //     duration: 1000,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 }

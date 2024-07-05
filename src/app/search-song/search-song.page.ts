@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  LoadingController,
-  ToastController,
-} from '@ionic/angular';
+// import {
+  // LoadingController,
+  // ToastController,
+// } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList, IonItem, IonAvatar, IonImg, IonLabel, IonInfiniteScroll } from "@ionic/angular/standalone";
@@ -27,8 +27,8 @@ export class SearchSongPage implements OnInit, AfterViewInit {
 
   constructor(
     private songSearchService: SongSearchService,
-    public loadingController: LoadingController,
-    public toastController: ToastController,
+    // public loadingController: LoadingController,
+    // public toastController: ToastController,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -55,21 +55,21 @@ export class SearchSongPage implements OnInit, AfterViewInit {
   }
 
   async loadSongs() {
-    if (this.isLoading) return;
-    this.isLoading = true;
+    // if (this.isLoading) return;
+    // this.isLoading = true;
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       await this.obtainNewSongs();
       console.log(this.songs)
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       this.router.navigate(['/search']);
     } finally {
-      await this.dismissLoading();
-      this.isLoading = false;
-      if (this.isFirstLoad) {
-        this.isFirstLoad = false;
-      }
+      // await this.dismissLoading();
+      // // this.isLoading = false;
+      // if (this.isFirstLoad) {
+      //   this.isFirstLoad = false;
+      // }
     }
   }
 
@@ -85,7 +85,7 @@ export class SearchSongPage implements OnInit, AfterViewInit {
 
       console.log(this.songs)
     } else {
-      await this.presentToastError('bottom', 'No more songs to load');
+      // await this.presentToastError('bottom', 'No more songs to load');
       if (this.observer) this.observer.disconnect();
       return;
     }
@@ -111,43 +111,43 @@ export class SearchSongPage implements OnInit, AfterViewInit {
     if (this.observer) this.observer.disconnect();
   }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: `Songs loaded successfully`,
-      duration: 500,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: `Songs loaded successfully`,
+  //     duration: 500,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: `Error loading songs: ${error}`,
-      duration: 500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: `Error loading songs: ${error}`,
+  //     duration: 500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      translucent: false,
-      animated: true,
-      spinner: 'bubbles',
-      cssClass: 'custom-loader-songs',
-    });
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     translucent: false,
+  //     animated: true,
+  //     spinner: 'bubbles',
+  //     cssClass: 'custom-loader-songs',
+  //   });
 
-    return await loading.present();
-  }
+  //   return await loading.present();
+  // }
 
-  async dismissLoading() {
-    return await this.loadingController.dismiss();
-  }
+  // async dismissLoading() {
+  //   return await this.loadingController.dismiss();
+  // }
 }

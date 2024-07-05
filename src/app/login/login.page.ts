@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+// import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+// import { ToastController } from '@ionic/angular';
 import {IonContent, IonGrid, IonRow, IonInput, IonInputPasswordToggle, IonButton} from '@ionic/angular/standalone';
 
 @Component({
@@ -26,61 +26,61 @@ export class LoginPage implements OnInit {
   }
 
   constructor(
-    public loadingController: LoadingController,
+    // public loadingController: LoadingController,
     private router: Router,
-    private toastController: ToastController
+    // private toastController: ToastController
   ) {}
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Iniciando sesion...',
-      translucent: true,
-    });
-    return await loading.present();
-  }
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     cssClass: 'my-custom-class',
+  //     message: 'Iniciando sesion...',
+  //     translucent: true,
+  //   });
+  //   return await loading.present();
+  // }
 
-  async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Has iniciado sesión!',
-      duration: 300,
-      position: position,
-      color: 'success',
-    });
+  // async presentToastSuccess(position: 'top' | 'middle' | 'bottom' = 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: 'Has iniciado sesión!',
+  //     duration: 300,
+  //     position: position,
+  //     color: 'success',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
-  async presentToastError(
-    position: 'top' | 'middle' | 'bottom' = 'bottom',
-    error: any
-  ) {
-    const toast = await this.toastController.create({
-      message: 'Error al iniciar sesion',
-      duration: 1500,
-      position: position,
-      color: 'danger',
-    });
+  // async presentToastError(
+  //   position: 'top' | 'middle' | 'bottom' = 'bottom',
+  //   error: any
+  // ) {
+  //   const toast = await this.toastController.create({
+  //     message: 'Error al iniciar sesion',
+  //     duration: 1500,
+  //     position: position,
+  //     color: 'danger',
+  //   });
 
-    await toast.present();
-  }
+  //   await toast.present();
+  // }
 
   async login() {
     try {
-      await this.presentLoading();
+      // await this.presentLoading();
       const result = (await this.loginService.sendLoginRequest(
         this.username,
         this.password
       )) as any;
       localStorage.setItem('token', result.token);
-      await this.presentToastSuccess();
+      // await this.presentToastSuccess();
       this.router.navigate(['/tabs']);
       return;
     } catch (error) {
-      await this.presentToastError('bottom', error);
+      // await this.presentToastError('bottom', error);
       console.error('Error al iniciar sesion', error);
     } finally {
-      await this.loadingController.dismiss();
+      // await this.loadingController.dismiss();
     }
   }
 }

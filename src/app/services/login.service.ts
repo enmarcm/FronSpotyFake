@@ -7,7 +7,7 @@ import { URL_REQUEST } from 'src/constants';
   providedIn: 'root',
 })
 export class LoginService {
-  httpClient = inject(HttpClient);
+  public httpClient = inject(HttpClient);
 
   //Falta crear el tipo y la interfaz
 
@@ -26,6 +26,39 @@ export class LoginService {
         password,
         email,
         dateOfBirth,
+      })
+    );
+  }
+
+  obtainDataUser() {
+    const token = localStorage.getItem('token');
+    return firstValueFrom(
+      this.httpClient.get(URL_REQUEST.OBTAIN_DATA_USER, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+    );
+  }
+
+  updateDataUser(data: RegisterData) {
+    const token = localStorage.getItem('token');
+    return firstValueFrom(
+      this.httpClient.put(URL_REQUEST.UPDATE_DATA_USER, data, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+    );
+  }
+
+  deleteAccount() {
+    const token = localStorage.getItem('token');
+    return firstValueFrom(
+      this.httpClient.delete(URL_REQUEST.DELETE_USER, {
+        headers: {
+          Authorization: `${token}`,
+        },
       })
     );
   }

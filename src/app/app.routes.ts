@@ -63,5 +63,13 @@ export const routes: Routes = [
     path: 'playlist/:idPlaylist',
     redirectTo: '/tabs/playlists/playlist/:idPlaylist'
   },
+  {
+    path: 'upload',
+    loadComponent: () => import('./upload/upload.page').then( m => m.UploadPage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
+  },
   
 ];

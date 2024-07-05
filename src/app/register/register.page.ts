@@ -6,6 +6,7 @@ import { LoginService } from '../services/login.service';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonContent, IonGrid, IonRow, IonInputPasswordToggle, IonDatetimeButton, IonModal, IonButton, IonInput, IonDatetime } from "@ionic/angular/standalone";
+import { UploadService } from '../upload.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,7 @@ export class RegisterPage implements OnInit {
     public dateOfBirth = new Date().toISOString();
   
 
-  private loginService = inject(LoginService);
+  public loginService = inject(LoginService);
 
   ngOnInit() {
     if (localStorage.getItem('token')) this.router.navigate(['/tabs']);
@@ -35,8 +36,9 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public loadingController: LoadingController,
-    private router: Router,
-    private toastController: ToastController
+    public router: Router,
+    public toastController: ToastController,
+    public uploadService: UploadService
   ) {}
 
   register = async () => {
@@ -114,5 +116,21 @@ export class RegisterPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  
+  selectedFile: File | null = null;
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadFile(): void {
+    if (this.selectedFile) {
+      this.uploadService.uploadFile(this.selectedFile).subscribe((url) => {
+        console.log('File uploaded! URL:', url);
+        // Aquí puedes manejar la URL del archivo subido
+      });
+    }
   }
 }

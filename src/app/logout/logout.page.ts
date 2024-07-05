@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IonContent, IonGrid, IonCol, IonRow } from "@ionic/angular/standalone";
 
 @Component({
@@ -11,9 +11,10 @@ import { IonContent, IonGrid, IonCol, IonRow } from "@ionic/angular/standalone";
   imports: [IonRow, IonCol, IonGrid, IonContent,  CommonModule, FormsModule, RouterLink],
 })
 export class LogoutPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activeRoute: ActivatedRoute) {}
 
   public seconds: number = 10;
+  public isClicked: boolean = false;
 
   ngOnInit() {
     localStorage.removeItem('token');
@@ -21,7 +22,10 @@ export class LogoutPage implements OnInit {
     const intervalId = setInterval(() => {
       if (this.seconds === 0) {
         clearInterval(intervalId);
-        this.router.navigate(['/main']);
+
+        if(!this.isClicked){
+          this.router.navigate(['/main']);
+        }
         return;
       }
       this.seconds--;

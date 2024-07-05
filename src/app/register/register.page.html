@@ -8,7 +8,6 @@
           class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
           color="success"
           [(ngModel)]="userName"
-          name="userName"
         ></ion-input>
       </ion-row>
 
@@ -20,7 +19,6 @@
           color="success"
           type="email"
           [(ngModel)]="email"
-          name="email"
         ></ion-input>
       </ion-row>
 
@@ -32,7 +30,6 @@
           class="bg-transparent border-transparent bg-gray-800 placeholder-black outline-none"
           color="success"
           [(ngModel)]="password"
-          name="password"
         >
           <ion-input-password-toggle
             slot="end"
@@ -42,18 +39,18 @@
         </ion-input>
       </ion-row>
 
-      <ion-row>
+      <ion-row class="flex justify-between">
         <label class="font-extrabold text-xl">Fecha de nacimiento</label>
 
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-datetime-button datetime="datetime" color="dark"></ion-datetime-button>
 
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
             <ion-datetime
               id="datetime"
-              name="dateOfBirth"
               presentation="date"
               [(ngModel)]="dateOfBirth"
+              color="success"
             ></ion-datetime>
           </ng-template>
         </ion-modal>
@@ -66,7 +63,7 @@
           class="mx-auto"
           (click)="register()"
         >
-          <span class="text-white font-bold text-md">iniciar sesion</span>
+          <span class="text-white font-bold text-md">Registrar usuario</span>
         </ion-button>
       </ion-row>
     </ion-grid>

@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import songsMocks from '../../mocks/music.json';
 import artistMocks from '../../mocks/artist.json';
 import { ItemCardComponent } from '../item-card/item-card.component';
@@ -9,16 +8,17 @@ import { ItemArtistComponent } from '../item-artist/item-artist.component';
 import albumMocks from '../../mocks/album.json';
 import { SongSearchService } from '../services/song-search.service';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonContent, IonGrid, IonCol, IonRow, IonText, IonTitle } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonTitle, IonText, IonRow, IonCol, IonGrid, IonContent, IonToolbar, IonHeader, 
     CommonModule,
     FormsModule,
-    IonicModule,
+    
     ItemCardComponent,
     ItemArtistComponent,
   ],

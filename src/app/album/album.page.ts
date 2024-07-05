@@ -1,19 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 import { SongSearchService } from '../services/song-search.service';
 import getDominantColorHex from 'src/utils/getColorFromUrl';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonImg, IonCard, IonCardHeader, IonList, IonCardContent, IonCardTitle, IonItem, IonThumbnail, IonLabel } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-album',
   templateUrl: './album.page.html',
   styleUrls: ['./album.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, PlayButtomComponent],
+  imports: [IonLabel, IonItem, IonCardTitle, IonCardContent, IonList, IonCardHeader, IonCard, IonImg, IonCol, IonRow, IonGrid, IonContent, IonTitle, IonToolbar, IonHeader, CommonModule, FormsModule, PlayButtomComponent, IonThumbnail],
 })
 export class AlbumPage implements OnInit {
   songSearchService = inject(SongSearchService);

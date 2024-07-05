@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { MusicPlayerService } from '../services/music-player.service';
+import { IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'play-buttom',
   templateUrl: './play-buttom.component.html',
   styleUrls: ['./play-buttom.component.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonIcon, IonButton, ],
 })
 export class PlayButtomComponent implements OnInit {
   @Input() songUrl: string | undefined; // Define an input property to receive the song URL

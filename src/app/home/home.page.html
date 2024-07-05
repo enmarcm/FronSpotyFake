@@ -19,7 +19,7 @@
       </ion-row>
 
       <ion-row class="overflow-x-scroll flex-nowrap min-h-48 h-[15%]">
-        @for(song of songs; track song.id){
+        @for(song of songs; track song._id){
         <ion-col size="7">
           <item-card
             [songName]="song.name"

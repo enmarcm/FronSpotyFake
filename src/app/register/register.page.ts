@@ -1,21 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 
 import { LoginService } from '../services/login.service';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { IonContent, IonGrid, IonRow, IonInputPasswordToggle, IonDatetimeButton, IonModal, IonButton, IonInput, IonDatetime } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [
-    IonicModule,
+  imports: [IonDatetime, IonInput, IonButton, IonModal, IonDatetimeButton, IonRow, IonGrid, IonContent, 
     CommonModule,
     FormsModule,
+    IonInputPasswordToggle
   ],
 })
 export class RegisterPage implements OnInit {
@@ -65,13 +65,16 @@ export class RegisterPage implements OnInit {
         parsedData
       )) as any;
 
+      console.log(result)
+
       if (!result || result?.error) {
-        throw new Error(`Ocurrio un error al registrarse`);
+        throw new Error(`Ocurrio un error al registrarse. ${result?.error}`);
       }
+
       await this.presentToastSuccess();
-    } catch (error) {
-      await this.presentToastError('bottom', error);
-      console.error(`Error al registrarse ${error}`);
+    } catch (error: any ) {
+      await this.presentToastError('bottom', error.error.error);
+      console.error(`Error al registrarse ${error.error.error}`);
     } finally {
       await this.loadingController.dismiss();
     }
@@ -80,7 +83,7 @@ export class RegisterPage implements OnInit {
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Iniciando sesion...',
+      message: 'Registrando usuario...',
       translucent: true,
     });
     return await loading.present();
@@ -103,7 +106,7 @@ export class RegisterPage implements OnInit {
     error: any
   ) {
     const toast = await this.toastController.create({
-      message: 'Error al registar',
+      message: error ? error : 'Error al registar',
       duration: 1000,
       position: position,
       color: 'danger',
@@ -113,5 +116,3 @@ export class RegisterPage implements OnInit {
     await toast.present();
   }
 }
-
-type ItemsOptions = ['userName', 'password', 'email', 'dateOfBirth'];

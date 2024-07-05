@@ -1,17 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonSearchbar, IonContent, IonCard, IonCardHeader, IonCardTitle } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonCardTitle, IonCardHeader, IonCard, IonContent, IonSearchbar, IonTitle, IonToolbar, IonHeader,  CommonModule, FormsModule],
 })
 export class SearchPage implements OnInit {
   songSearchService = inject(SongSearchService);

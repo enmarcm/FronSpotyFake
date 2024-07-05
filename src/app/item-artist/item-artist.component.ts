@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'item-artist',
   templateUrl: './item-artist.component.html',
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonCardTitle, IonCardHeader, IonCard, ],
 })
 export class ItemArtistComponent implements OnInit {
   constructor(private router: Router) {}

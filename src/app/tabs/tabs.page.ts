@@ -1,15 +1,15 @@
 import { Component, EnvironmentInjector, OnInit, inject } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { home, search, barcodeOutline } from 'ionicons/icons';
-import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { IonTabs, IonTabBar, IonTabButton, IonLabel, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonIcon, IonLabel, IonTabButton, IonTabBar, IonTabs, ],
 })
 export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-player',
   templateUrl: './modal-player.component.html',
   standalone  : true,
   styleUrls: ['./modal-player.component.scss'],
-  imports: [IonicModule]
+  imports: []
 })
 export class ModalPlayerComponent  implements OnInit {
 

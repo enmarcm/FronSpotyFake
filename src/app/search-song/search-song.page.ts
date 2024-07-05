@@ -2,19 +2,19 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  IonicModule,
   LoadingController,
   ToastController,
 } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList, IonItem, IonAvatar, IonImg, IonLabel, IonInfiniteScroll } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-search-song',
   templateUrl: './search-song.page.html',
   styleUrls: ['./search-song.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonInfiniteScroll, IonLabel, IonImg, IonAvatar, IonItem, IonList, IonSearchbar, IonContent, IonTitle, IonToolbar, IonHeader,  CommonModule, FormsModule],
 })
 export class SearchSongPage implements OnInit, AfterViewInit {
   public name: string = '';

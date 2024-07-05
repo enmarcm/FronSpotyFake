@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, IonModal } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -9,13 +8,63 @@ import { addCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { TypeaheadComponent } from '../typehead/typehead.component';
 import { BASE_IMAGE_DEFAULT } from 'src/constants';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonButton,
+  IonIcon,
+  IonCard,
+  IonImg,
+  IonCardHeader,
+  IonCardTitle,
+  IonList,
+  IonItem,
+  IonItemSliding,
+  IonAvatar,
+  IonLabel,
+  IonItemOption,
+  IonItemOptions,
+  IonModal,
+  IonButtons,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-playlists',
   templateUrl: './playlists.page.html',
   styleUrls: ['./playlists.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TypeaheadComponent],
+  imports: [
+    IonButtons,
+    IonModal,
+    IonItemOptions,
+    IonItemOption,
+    IonLabel,
+    IonAvatar,
+    IonItemSliding,
+    IonItem,
+    IonList,
+    IonCardTitle,
+    IonCardHeader,
+    IonImg,
+    IonCard,
+    IonIcon,
+    IonButton,
+    IonCol,
+    IonRow,
+    IonGrid,
+    IonContent,
+    IonTitle,
+    IonToolbar,
+    IonHeader,
+    CommonModule,
+    FormsModule,
+    TypeaheadComponent,
+  ],
 })
 export class PlaylistsPage implements OnInit {
   public playlists: Array<Playlist> = [];
@@ -116,8 +165,6 @@ export class PlaylistsPage implements OnInit {
     this.router.navigate(['/playlist', playlistId]);
 
   goToLikes = () => this.router.navigate(['/likes']);
-
-  
 
   async presentToastError(
     position: 'top' | 'middle' | 'bottom' = 'bottom',

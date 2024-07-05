@@ -1,17 +1,17 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonGrid, IonRow, IonContent, IonCol, IonImg, IonCardHeader, IonCard, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel , IonThumbnail } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-artist',
   templateUrl: './artist.page.html',
   styleUrls: ['./artist.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonLabel, IonItem, IonList, IonCardContent, IonCardTitle, IonCard, IonCardHeader, IonImg, IonCol, IonContent, IonRow, IonGrid, IonTitle, IonToolbar, IonHeader, CommonModule, FormsModule, IonThumbnail],
 })
 export class ArtistPage implements OnInit {
   songSearchService = inject(SongSearchService);

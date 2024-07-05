@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { play, pause } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { JoinArtistsPipe } from '../services/joinArtists';
@@ -10,6 +9,7 @@ import { SharedDataService } from '../services/shared-data.service';
 import { FormsModule } from '@angular/forms';
 import { ModalPlayerComponent } from '../modal-player/modal-player.component';
 import {ModalController} from '@ionic/angular';
+import { IonFooter, IonToolbar, IonButtons, IonButton, IonIcon, IonModal, IonHeader, IonTitle, IonContent } from "@ionic/angular/standalone";
 
 interface ArtistInterface {
   id: string;
@@ -23,8 +23,8 @@ interface ArtistInterface {
   selector: 'app-music-player',
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.scss'],
-  imports: [
-    IonicModule,
+  imports: [IonContent, IonTitle, IonHeader, IonModal, IonIcon, IonButton, IonButtons, IonToolbar, IonFooter, 
+    
     CommonModule,
     PlayButtomComponent,
     JoinArtistsPipe,

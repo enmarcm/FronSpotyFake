@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
+import { IonContent, IonGrid, IonCol, IonRow } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.page.html',
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink],
+  imports: [IonRow, IonCol, IonGrid, IonContent,  CommonModule, FormsModule, RouterLink],
 })
 export class LogoutPage implements OnInit {
   constructor(private router: Router) {}

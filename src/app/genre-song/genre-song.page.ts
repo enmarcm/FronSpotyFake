@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { SongSearchService } from '../services/song-search.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonList, IonContent, IonItem, IonAvatar, IonImg, IonLabel, IonInfiniteScroll } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-genre-song',
   templateUrl: './genre-song.page.html',
   styleUrls: ['./genre-song.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonInfiniteScroll, IonLabel, IonImg, IonAvatar, IonItem, IonContent, IonList, IonTitle, IonToolbar, IonHeader,  CommonModule, FormsModule],
 })
 export class GenreSongPage implements OnInit, AfterViewInit {
   songSearchService = inject(SongSearchService);

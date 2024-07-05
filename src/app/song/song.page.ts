@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SongSearchService } from '../services/song-search.service';
 import getDominantColorHex from 'src/utils/getColorFromUrl';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 import { SharedDataService } from '../services/shared-data.service';
+import { IonHeader, IonContent, IonTitle, IonToolbar, IonRow, IonGrid, IonCol, IonImg, IonCard, IonCardTitle, IonCardSubtitle, IonCardHeader } from "@ionic/angular/standalone";
 
 interface ArtistInterface {
   id: string;
@@ -22,7 +22,7 @@ interface ArtistInterface {
   templateUrl: './song.page.html',
   styleUrls: ['./song.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, PlayButtomComponent],
+  imports: [IonCardHeader, IonCardSubtitle, IonCardTitle, IonCard, IonImg, IonCol, IonGrid, IonRow, IonToolbar, IonTitle, IonContent, IonHeader,  CommonModule, FormsModule, PlayButtomComponent],
 })
 export class SongPage implements OnInit {
   songSearchService = inject(SongSearchService);

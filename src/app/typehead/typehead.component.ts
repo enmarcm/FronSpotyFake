@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonButton, IonTitle, IonButtons, IonSearchbar, IonContent, IonList, IonCheckbox, IonItem, IonImg } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-typehead',
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonImg, IonItem, IonCheckbox, IonList, IonContent, IonSearchbar, IonButtons, IonTitle, IonButton, IonToolbar, IonHeader, ],
   templateUrl: './typehead.component.html',
 })
 export class TypeaheadComponent implements OnInit {

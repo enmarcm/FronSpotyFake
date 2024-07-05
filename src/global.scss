@@ -149,3 +149,13 @@ ion-content::webkit-scrollbar {
     #000000 60% /* to-black, comienza justo en el 75% */
   );
 }
+
+.ion-page {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ion-page-invisible{
+  opacity: 100% !important;
+}

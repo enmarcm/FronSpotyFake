@@ -11,7 +11,7 @@
     </div>
 
     <ion-list class="h-full w-full overflow-scroll">
-      @for(song of songs; track song.id){
+      @for(song of songs; track (song.idSong)){
         <ion-item  class="my-1 px-3 hover:cursor-pointer opacity-80" (click)="goToSong(song.idSong)">
           <ion-avatar slot="start">
             <ion-img [src]="song.urlImage"/>

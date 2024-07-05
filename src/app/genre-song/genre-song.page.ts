@@ -19,8 +19,8 @@ export class GenreSongPage implements OnInit, AfterViewInit {
   constructor(
     public loadingController: LoadingController,
     public toastController: ToastController,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    public router: Router,
+    public activatedRoute: ActivatedRoute
   ) {
     this.genre = this.activatedRoute.snapshot.paramMap.get('genre') || '';
   }
@@ -55,7 +55,6 @@ export class GenreSongPage implements OnInit, AfterViewInit {
       duration: 500,
       position: position,
       color: 'success',
-      icon: 'checkmark-circle-outline',
     });
 
     await toast.present();
@@ -70,7 +69,6 @@ export class GenreSongPage implements OnInit, AfterViewInit {
       duration: 500,
       position: position,
       color: 'danger',
-      icon: 'close-circle-outline',
     });
 
     await toast.present();

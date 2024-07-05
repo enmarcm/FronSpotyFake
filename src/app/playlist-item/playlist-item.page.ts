@@ -110,7 +110,6 @@ export class PlaylistItemPage implements OnInit {
       duration: 500,
       position: position,
       color: 'success',
-      icon: 'checkmark-circle-outline',
     });
 
     await toast.present();
@@ -125,7 +124,6 @@ export class PlaylistItemPage implements OnInit {
       duration: 1500,
       position: position,
       color: 'danger',
-      icon: 'close-circle-outline',
     });
 
     await toast.present();

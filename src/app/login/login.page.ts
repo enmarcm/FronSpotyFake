@@ -46,7 +46,6 @@ export class LoginPage implements OnInit {
       duration: 300,
       position: position,
       color: 'success',
-      icon: 'checkmark-circle-outline',
     });
 
     await toast.present();
@@ -61,7 +60,6 @@ export class LoginPage implements OnInit {
       duration: 1500,
       position: position,
       color: 'danger',
-      icon: 'close-circle-outline',
     });
 
     await toast.present();

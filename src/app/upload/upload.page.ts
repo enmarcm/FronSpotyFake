@@ -196,7 +196,6 @@ export class UploadPage implements OnInit {
       duration: 1000,
       position: position,
       color: 'success',
-      icon: 'checkmark-circle-outline',
     });
 
     await toast.present();
@@ -211,7 +210,6 @@ export class UploadPage implements OnInit {
       duration: 1000,
       position: position,
       color: 'danger',
-      icon: 'close-circle-outline',
     });
 
     await toast.present();

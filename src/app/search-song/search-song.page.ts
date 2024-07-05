@@ -60,6 +60,7 @@ export class SearchSongPage implements OnInit, AfterViewInit {
     try {
       await this.presentLoading();
       await this.obtainNewSongs();
+      console.log(this.songs)
     } catch (error) {
       await this.presentToastError('bottom', error);
       this.router.navigate(['/search']);
@@ -116,7 +117,6 @@ export class SearchSongPage implements OnInit, AfterViewInit {
       duration: 500,
       position: position,
       color: 'success',
-      icon: 'checkmark-circle-outline',
     });
 
     await toast.present();
@@ -131,7 +131,6 @@ export class SearchSongPage implements OnInit, AfterViewInit {
       duration: 500,
       position: position,
       color: 'danger',
-      icon: 'close-circle-outline',
     });
 
     await toast.present();

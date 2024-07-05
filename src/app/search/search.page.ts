@@ -62,7 +62,6 @@ export class SearchPage implements OnInit {
       duration: 1500,
       position: position,
       color: 'danger',
-      icon: 'close-circle-outline',
     });
 
     await toast.present();

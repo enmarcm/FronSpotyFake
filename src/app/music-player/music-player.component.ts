@@ -71,8 +71,8 @@ export class MusicPlayerComponent implements OnInit {
       
       this.songUrl = url;
       const audio = this.musicPlayerService.audio;
-      audio.addEventListener('timeupdate', this.updateProgressBar, false);
-      audio.addEventListener('timeupdate', this.updateProgressBarModal, false);
+      // audio.addEventListener('timeupdate', this.updateProgressBar, false);
+      // audio.addEventListener('timeupdate', this.updateProgressBarModal, false);
     });
     this.musicPlayerService.playStatus$.subscribe((status) => {
       this.isPlaying = status;
@@ -119,27 +119,27 @@ export class MusicPlayerComponent implements OnInit {
     this.OpenModal(false);
   }
 
-  updateProgressBar = () => {
-    const audio = this.musicPlayerService.audio;
-    const progressBar = document.getElementById('audioProgress') as HTMLProgressElement;
-    if (progressBar && audio && isFinite(audio.currentTime) && isFinite(audio.duration) && audio.duration > 0) {
-      const percentage = (audio.currentTime / audio.duration) * 100;
-      progressBar.value = percentage;
-    } else if (progressBar) {
-      progressBar.value = 0; // Set to 0 or a sensible default if conditions are not met
-    }
-  }
+  // updateProgressBar = () => {
+  //   const audio = this.musicPlayerService.audio;
+  //   const progressBar = document.getElementById('audioProgress') as HTMLProgressElement;
+  //   if (progressBar && audio && isFinite(audio.currentTime) && isFinite(audio.duration) && audio.duration > 0) {
+  //     const percentage = (audio.currentTime / audio.duration) * 100;
+  //     progressBar.value = percentage;
+  //   } else if (progressBar) {
+  //     progressBar.value = 0; // Set to 0 or a sensible default if conditions are not met
+  //   }
+  // }
   
-  updateProgressBarModal = () => {
-    const audio = this.musicPlayerService.audio;
-    const progressBar = document.getElementById('audioProgressModal') as HTMLProgressElement;
-    if (progressBar && audio && isFinite(audio.currentTime) && isFinite(audio.duration) && audio.duration > 0) {
-      const percentage = (audio.currentTime / audio.duration) * 100;
-      progressBar.value = percentage;
-    } else if (progressBar) {
-      progressBar.value = 0; // Set to 0 or a sensible default if conditions are not met
-    }
-  }
+  // updateProgressBarModal = () => {
+  //   const audio = this.musicPlayerService.audio;
+  //   const progressBar = document.getElementById('audioProgressModal') as HTMLProgressElement;
+  //   if (progressBar && audio && isFinite(audio.currentTime) && isFinite(audio.duration) && audio.duration > 0) {
+  //     const percentage = (audio.currentTime / audio.duration) * 100;
+  //     progressBar.value = percentage;
+  //   } else if (progressBar) {
+  //     progressBar.value = 0; // Set to 0 or a sensible default if conditions are not met
+  //   }
+  // }
 
 
   nextSong() {

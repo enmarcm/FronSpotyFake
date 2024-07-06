@@ -16,10 +16,27 @@ export class MusicPlayerService {
   duration$ = this.durationSource.asObservable();
   private songUrlSource = new BehaviorSubject<string | null>(null);
   public songUrl$ = this.songUrlSource.asObservable();
+  private tracks: any[] = []; // Replace `any` with your Track model
+  private currentTrackIndex = 0;
+
+  private currentTrackSource = new BehaviorSubject<any | null>(null); // Replace `any` with your Track model
+  public currentTrack$ = this.currentTrackSource.asObservable();
 
   constructor(
     // private loadingController: LoadingController
   ) {}
+
+  setPlaylist(tracks: any[]) {
+    this.tracks = tracks;
+    this.currentTrackIndex = 0; // Optionally, start playing the first track
+    this.updateCurrentTrack();
+  }
+
+  private updateCurrentTrack(): void {
+    const currentTrack = this.tracks[this.currentTrackIndex];
+    console.log('Updating Current Track:', currentTrack); // Debugging line
+    this.currentTrackSource.next(currentTrack);
+  }
 
   async play(url: string) {
     this.songUrlSource.next(url);
@@ -38,6 +55,14 @@ export class MusicPlayerService {
     } catch (error) {
       console.error("Error during audio playback:", error);
       // await this.dismissLoading();
+    }
+  }
+
+  async play2() {
+    if (this.audio.src) {
+      this.audio.play();
+      this.isPlaying = true;
+      this.playStatus.next(this.isPlaying);
     }
   }
 
@@ -95,4 +120,23 @@ export class MusicPlayerService {
     }
   }
 
+  private playCurrentTrack(): void {
+    const currentTrack = this.tracks[this.currentTrackIndex];
+    this.play(currentTrack.url_song); // Assuming each track has a [`url`
+  }
+  playNext(): void {
+    if (this.currentTrackIndex < this.tracks.length - 1) {
+      this.currentTrackIndex++;
+      this.updateCurrentTrack();
+      this.playCurrentTrack();
+    }
+  }
+
+  playPrevious(): void {
+    if (this.currentTrackIndex > 0) {
+      this.currentTrackIndex--;
+      this.updateCurrentTrack();
+      this.playCurrentTrack();
+    }
+  }
 }

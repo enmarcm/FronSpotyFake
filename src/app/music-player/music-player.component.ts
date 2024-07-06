@@ -50,13 +50,17 @@ export class MusicPlayerComponent implements OnInit {
   public dominantColor: string = '';
   public formattedDuration = '';
   public currentAudioPosition = 0;
-  
+  currentTrack: any;
+  isAlbum: boolean; // Add this property
+  currentSong: string; // Add this property
   constructor(
     private musicPlayerService: MusicPlayerService,
     private sharedDataService: SharedDataService,
     public modalController: ModalController
   ) {
     addIcons({ play, pause });
+    this.isAlbum = false; // Initialize this property
+    this.currentSong = ''; // Initialize this property
   }
   
   isShow() {
@@ -89,6 +93,12 @@ export class MusicPlayerComponent implements OnInit {
     this.sharedDataService.currentTrackPhoto.subscribe(
       (photo) => (this.urlImage = photo)
     );
+    this.musicPlayerService.currentTrack$.subscribe(track => {
+      this.currentTrack = track;
+      console.log('Current Track:', this.currentTrack); // Debugging line
+      this.isAlbum = !!track.id; // Assuming track has an albumId property
+      this.currentSong = track.name; 
+    });
   }
 
   togglePlayPause() {
@@ -144,12 +154,12 @@ export class MusicPlayerComponent implements OnInit {
 
   nextSong() {
     // Increment the song index or loop back to the start
-
+    this.musicPlayerService.playNext();
   }
   
   previousSong() {
     // Decrement the song index or loop to the end
-
+    this.musicPlayerService.playPrevious();
   }
 
 }

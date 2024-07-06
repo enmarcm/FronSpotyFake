@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MusicPlayerService } from '../services/music-player.service';
 // import { LoadingController, ToastController } from '@ionic/angular';
 import { PlayButtomComponent } from '../play-buttom/play-buttom.component';
 import { SongSearchService } from '../services/song-search.service';
@@ -31,7 +32,8 @@ export class AlbumPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     // private loadingController: LoadingController,
     // public toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private musicPlayerService: MusicPlayerService
   ) {
     this.idAlbum = this.activatedRoute.snapshot.paramMap.get('idAlbum') || '';
   }
@@ -40,7 +42,7 @@ export class AlbumPage implements OnInit {
     try {
       // await this.presentLoading();
       const response = await this.songSearchService.getAlbumInfo(this.idAlbum);
-
+      console.log('response', response);
       this.dominantColor = await getDominantColorHex(response.urlImage);
       this.idAlbum = response.id;
       this.name = response.name;
@@ -49,6 +51,7 @@ export class AlbumPage implements OnInit {
       this.totalTracks = response.total_tracks;
       this.artists = response.artists;
       this.songs = response.songs;
+      this.musicPlayerService.setPlaylist(this.songs);
       // await this.presentToastSuccess('bottom');
     } catch (error) {
       // await this.presentToastError('bottom', error);
@@ -58,7 +61,7 @@ export class AlbumPage implements OnInit {
     }
   }
 
-  async presentLoading() {
+  // async presentLoading() {
     // const loading = await this.loadingController.create({
       // translucent: false,
       // animated: true,
@@ -67,7 +70,7 @@ export class AlbumPage implements OnInit {
     // });
 
     // return await loading.present();
-  }
+  // }
 
   // async dismissLoading() {
     // return await this.loadingController.dismiss();
@@ -108,6 +111,10 @@ export class AlbumPage implements OnInit {
 
   goToArtist(idArtist: string) {
     this.router.navigate(['/artist', idArtist]);
+  }
+
+  playAlbum() {
+    this.musicPlayerService.play(this.songs[0].url_song);
   }
 }
 
